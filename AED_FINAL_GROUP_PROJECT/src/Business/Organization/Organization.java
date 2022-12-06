@@ -19,8 +19,8 @@ public abstract class Organization {
     private String name;
     private String orgName;
     private TaskQueue taskQueue;
-    private EmployeeDir employeeDirectory;
-    private UserCredentialsDir userCredentialsDirectory;
+    private EmployeeDir employeeDir;
+    private UserCredentialsDir userCredentialsDir;
     private int organizationCode;
     private static int count = 1;
     public HashSet<Role> role;
@@ -28,7 +28,7 @@ public abstract class Organization {
     //enums for types of organization
     public enum Type {
         Victim("Victim Organization"),
-        EventCreator("EventMaker Organization"),
+        EventCreator("EventCreator Organization"),
         Volunteer("Volunteer Organization"),
         CSO("CSO Organization"),
         Supplier("Supplier"),
@@ -51,8 +51,8 @@ public abstract class Organization {
     public Organization(String name) {
         this.name = name;
         taskQueue = new TaskQueue();
-        employeeDirectory = new EmployeeDir();
-        userCredentialsDirectory = new UserCredentialsDir();
+        employeeDir = new EmployeeDir();
+        userCredentialsDir = new UserCredentialsDir();
 
         organizationCode = count;
         role = new HashSet<>();
@@ -70,11 +70,11 @@ public abstract class Organization {
     public abstract HashSet<Role> getSupportedRole();
 
     public UserCredentialsDir getUserCredentialsDirectory() {
-        return userCredentialsDirectory;
+        return userCredentialsDir;
     }
 
     public void setUserCredentialsDirectory(UserCredentialsDir userCredentialsDirectory) {
-        this.userCredentialsDirectory = userCredentialsDirectory;
+        this.userCredentialsDir = userCredentialsDirectory;
     }
 
     public static int getCount() {
@@ -94,11 +94,11 @@ public abstract class Organization {
     }
 
     public EmployeeDir getEmployeeDirectory() {
-        return employeeDirectory;
+        return employeeDir;
     }
 
     public void setEmployeeDirectory(EmployeeDir employeeDirectory) {
-        this.employeeDirectory = employeeDirectory;
+        this.employeeDir = employeeDirectory;
     }
 
     public int getOrganizationCode() {
