@@ -4,10 +4,23 @@
  */
 package Business.TaskQueue;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author siddh
  */
 public class TaskQueue {
+    
+    private ArrayList<TaskRequest> taskRequestList;
+    
+    public TaskQueue(){
+        taskRequestList=new ArrayList<>();
+    }
+
+    public ArrayList<TaskRequest> getTaskRequestList() {
+        return taskRequestList;
+    }
+    
     
 }

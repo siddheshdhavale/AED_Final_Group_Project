@@ -8,6 +8,42 @@ package Business.TaskQueue;
  *
  * @author siddh
  */
-public class FireFighterTaskRequest {
+public class FireFighterTaskRequest extends TaskRequest{
+    
+    private String description;
+    private boolean add;
+    private String location;
+    
+    public FireFighterTaskRequest() {
+        
+        add = false;
+        
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isAdd() {
+        return add;
+    }
+
+    public void setAdd(boolean add) {
+        this.add = add;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
+    
     
 }
