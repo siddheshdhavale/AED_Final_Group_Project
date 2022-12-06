@@ -9,6 +9,6 @@ package Business.Role;
  *
  * @author siddh
  */
-public class EventCreatorRole {
+public class EventCreatorRole extends Role{
     
 }

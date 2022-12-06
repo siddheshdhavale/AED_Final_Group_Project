@@ -8,7 +8,7 @@ package Business.Role;
  *
  * @author siddh
  */
-public class DocAdminRole {
+public class DocAdminRole extends Role{
     
 }
 

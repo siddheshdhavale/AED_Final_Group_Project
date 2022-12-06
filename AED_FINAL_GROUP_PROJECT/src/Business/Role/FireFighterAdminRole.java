@@ -9,6 +9,6 @@ package Business.Role;
  *
  * @author siddh
  */
-public class FireFighterAdminRole {
+public class FireFighterAdminRole extends Role{
     
 }
