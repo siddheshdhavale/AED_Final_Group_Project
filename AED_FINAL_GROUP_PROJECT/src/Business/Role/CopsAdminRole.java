@@ -9,6 +9,6 @@ package Business.Role;
  *
  * @author siddh
  */
-public class CopsAdminRole {
+public class CopsAdminRole extends Role{
     
 }

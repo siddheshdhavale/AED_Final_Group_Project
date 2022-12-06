@@ -5,10 +5,23 @@
  */
 package Business.Enterprise;
 
+import Business.Role.CSOManagerRole;
+import Business.Role.Role;
+import java.util.HashSet;
+
+
 /**
  *
  * @author ghostdaddy16
  */
-public class CSOEnterprise {
-    
+public class CSOEnterprise extends Enterprise {
+    public CSOEnterprise(String name){
+        super(name,Enterprise.EnterpriseType.CSO);
+    }
+    //hash map to for NGO role addition
+    @Override
+    public HashSet<Role> getSupportedRole(){
+        role.add(new CSOManagerRole());
+        return role;
+    }
 }

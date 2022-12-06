@@ -9,7 +9,7 @@ package Business.Role;
  *
  * @author siddh
  */
-public class SysadminRole {
+public class SysadminRole extends Role{
     
 }
 

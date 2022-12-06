@@ -9,7 +9,7 @@ package Business.Role;
  *
  * @author siddh
  */
-public class VolunteerAdminRole {
+public class VolunteerAdminRole extends Role{
     
 }
 

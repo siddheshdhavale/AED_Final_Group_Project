@@ -9,6 +9,6 @@ package Business.Role;
  *
  * @author siddh
  */
-public class CSOManagerRole {
+public class CSOManagerRole extends Role{
     
 }

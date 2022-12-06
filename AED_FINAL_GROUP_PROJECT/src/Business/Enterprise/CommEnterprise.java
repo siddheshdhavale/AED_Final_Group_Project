@@ -5,10 +5,37 @@
  */
 package Business.Enterprise;
 
+import Business.Role.EventCreatorAdminRole;
+import Business.Role.Role;
+import Business.Role.VolunteerAdminRole;
+import java.util.HashSet;
+import Business.Role.VictimAdminRole;
+
+        
+
+
 /**
  *
  * @author ghostdaddy16
  */
-public class CommEnterprise {
+public class CommEnterprise extends Enterprise{
+     public CommEnterprise(String name){
+        super(name,Enterprise.EnterpriseType.Comm);
+    }
+    //add roles using hashsets
+    @Override
+     public HashSet<Role> getSupportedRole(){
+       
+        role.add(new EventCreatorAdminRole());
+              
+        role.add(new VictimAdminRole());
+        
+        role.add(new VolunteerAdminRole());
+       
+        return role;
+        
+    }
+    
+    
     
 }

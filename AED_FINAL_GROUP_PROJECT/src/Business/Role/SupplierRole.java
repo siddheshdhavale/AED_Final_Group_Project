@@ -9,7 +9,7 @@ package Business.Role;
  *
  * @author siddh
  */
-public class SupplierRole {
+public class SupplierRole extends Role{
     
 }
 
