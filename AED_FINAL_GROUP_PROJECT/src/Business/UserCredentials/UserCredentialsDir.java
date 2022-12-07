@@ -31,7 +31,7 @@ public class UserCredentialsDir {
         return null;
     }
     //create new user 
-    public UserCredentials createUserAccount(String username, String password, Employee employee, Role role){
+    public UserCredentials createUserCredentials(String username, String password, Employee employee, Role role){
         UserCredentials userAccount = new UserCredentials();
         userAccount.setUsername(username);
         userAccount.setPassword(password);
