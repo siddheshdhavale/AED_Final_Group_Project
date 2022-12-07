@@ -15,7 +15,7 @@ public class Supplier {
     private TaskQueue taskQueue;
     private ItemDir itemDir;
     private Item item;
-    //Supplier class constructor to update ids, work queue and item directory
+    //Supplier class constructor to update ids, task queue and item directory
     public Supplier() {
         
         supplierId = "SUP"+(++sCount);
