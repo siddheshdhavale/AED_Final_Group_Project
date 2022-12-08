@@ -72,7 +72,7 @@ public class EventSeekerAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnManageUserAccount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnManageUserAccount.setText(" User Account");
+        btnManageUserAccount.setText(" User Credentials");
         btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageUserAccountActionPerformed(evt);
