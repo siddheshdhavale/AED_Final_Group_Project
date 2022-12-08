@@ -265,117 +265,29 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblProvideReq.getSelectedRow();
-
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
-
-            ProviderWorkRequest pwr = (ProviderWorkRequest) tblProvideReq.getValueAt(selectedRow, 3);
-            if (pwr.getReciever() != null) {
-                if (pwr.getStatus().equals("Pending")) {
-                    UserAccount a = pwr.getSender();
-                    int temp = 0;
-                    if (p.getItemDirectory().getSupplyList().size() <= 0) {
-                        JOptionPane.showMessageDialog(null, "No Stock available. Request from Provider");
-                        return;
-                    }
-                    for (Item item : p.getItemDirectory().getSupplyList()) {
-
-                        if (pwr.getReq().equals(item.getRequirement())&& pwr.getRtype().equals(item.getRequirementType())) {
-
-                            if (item.getQuantity() - pwr.getQuantity() < 0) {
-                                JOptionPane.showMessageDialog(null, "Not enough supply. Wait for sometime");
-                                return;
-                            }
-                            item.setQuantity(item.getQuantity() - pwr.getQuantity());
-                            temp = 1;
-                        }
-                    }
-
-                    if(temp==1){
-                        pwr.setStatus("Complete");
-                        JOptionPane.showMessageDialog(null, "You have completed the request successfully");
-                    }else{
-                        pwr.setStatus("Requested");
-                        JOptionPane.showMessageDialog(null, "No Stock Available, Request Failed !!","Warning",JOptionPane.WARNING_MESSAGE);
-                    }
-                    populateTableSupply();
-                    populateTableCreate();
-                } else {
-                    JOptionPane.showMessageDialog(null, "You cannot complete it two times.","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Please assign first","Warning",JOptionPane.WARNING_MESSAGE);
-            }
+        
 
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblProvideReq.getSelectedRow();
-        if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
-
-            ProviderWorkRequest nswr = (ProviderWorkRequest) tblProvideReq.getValueAt(selectedRow, 3);
-
-            nswr.setStatus("Pending");
-            nswr.setReciever(account);
-
-            populateTableSupply();
-
-        }
+        
 
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void txtReqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReqKeyTyped
         // TODO add your handling code here:
-        char typedReq = evt.getKeyChar();
-        if(!Character.isAlphabetic(typedReq) && !Character.isWhitespace(typedReq)){
-            evt.consume();
-        }
-        //Restrict the length to 256
-        if(txtReq.getText().length() > 255){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtReqKeyTyped
 
     private void txtQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantityKeyTyped
         // TODO add your handling code here:
-        char typedQnt = evt.getKeyChar();
-        if(!Character.isDigit(typedQnt)){
-            evt.consume();
-        }
-        //Restrict the length to 5
-        if(txtQuantity.getText().length() > 4){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtQuantityKeyTyped
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        String type = comboType.getSelectedItem().toString();
-        String req = txtReq.getText();
-        int quantity = Integer.parseInt(txtQuantity.getText());
-
-        if(req.equals("") || req.isEmpty())
-
-        {
-            JOptionPane.showMessageDialog(null, "Please create requirement");
-            return;
-        }
-
-        Item item = p.getItemDirectory().addSupply();
-
-        item.setRequirementType(type);
-        item.setRequirement(req);
-        item.setQuantity(quantity);
-
-        populateTableCreate();
-
-        txtReq.setText("");
-        txtQuantity.setText("");
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
 
