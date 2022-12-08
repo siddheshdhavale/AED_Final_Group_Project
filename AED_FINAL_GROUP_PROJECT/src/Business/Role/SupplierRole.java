@@ -6,7 +6,7 @@ package Business.Role;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
-import Business.Organization.ProviderOrganization;
+import Business.Organization.SupplierOrganization;
 import Business.UserCredentials.UserCredentials;
 import UI.Supplier.SupplierWorkArea;
 import javax.swing.JPanel;
