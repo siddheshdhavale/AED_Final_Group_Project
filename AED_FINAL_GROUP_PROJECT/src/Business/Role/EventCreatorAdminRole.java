@@ -7,7 +7,7 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserCredentials.UserCredentials;
-import UI.EventMaker.EventCreatorAdminWorkArea;
+import UI.EventCreator.EventCreatorAdminWorkArea;
 import javax.swing.JPanel;
 /**
  *
@@ -22,6 +22,6 @@ public class EventCreatorAdminRole extends Role{
         @Override
         public String toString()
 {
-   return Role.RoleType.EventMakerAdmin.getValue();
+   return Role.RoleType.EventCreatorAdmin.getValue();
 }
 }
