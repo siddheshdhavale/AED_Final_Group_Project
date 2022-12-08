@@ -139,6 +139,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnBack.setText("BACK");
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +189,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGap(0, 504, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
