@@ -3,12 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Business.Role;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import UI.HospitalEnterprise.HospitalAdminWorkArea;
+import javax.swing.JPanel;
 /**
  *
- * @author siddh
+ * @author yashrevadekar
  */
 public class DocAdminRole extends Role{
-    
+        //overriding main panel with doctor admin work area whenever doctor admin role is called
+    @Override
+    public JPanel createWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system){
+        return new HospitalAdminWorkArea(userProcessContainer,enterprise,system);
+    }   
+        @Override
+        public String toString()
+{
+   return Role.RoleType.DoctorAdminRole.getValue();
 }
-
+}

@@ -69,11 +69,11 @@ public abstract class Organization {
 
     public abstract HashSet<Role> getSupportedRole();
 
-    public UserCredentialsDir getUserCredentialsDirectory() {
+    public UserCredentialsDir getUserCredentialsDir() {
         return userCredentialsDir;
     }
 
-    public void setUserCredentialsDirectory(UserCredentialsDir userCredentialsDirectory) {
+    public void setUserCredentialsDir(UserCredentialsDir userCredentialsDirectory) {
         this.userCredentialsDir = userCredentialsDirectory;
     }
 
@@ -93,11 +93,11 @@ public abstract class Organization {
         this.role = role;
     }
 
-    public EmployeeDir getEmployeeDirectory() {
+    public EmployeeDir getEmployeeDir() {
         return employeeDir;
     }
 
-    public void setEmployeeDirectory(EmployeeDir employeeDirectory) {
+    public void setEmployeeDir(EmployeeDir employeeDirectory) {
         this.employeeDir = employeeDirectory;
     }
 
