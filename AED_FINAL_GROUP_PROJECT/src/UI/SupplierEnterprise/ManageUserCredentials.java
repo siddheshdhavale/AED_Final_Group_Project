@@ -5,6 +5,20 @@
  */
 package UI.SupplierEnterprise;
 
+import Business.Ecosystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Organization.VolunteerOrganization;
+import Business.Role.Role;
+import Business.Role.VolunteerRole;
+import Business.UserCredentials.UserCredentials;
+import Business.Volunteer.Volunteer;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ghostdaddy16
@@ -14,8 +28,60 @@ public class ManageUserCredentials extends javax.swing.JPanel {
     /**
      * Creates new form ManageUserCredentials
      */
-    public ManageUserCredentials() {
+    private JPanel userProcessContainer;
+    private Enterprise enterprise;
+    public ManageUserCredentials(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.enterprise = enterprise;
+        populateComboOrganization();
+        populateData();
+
+    }
+    
+    //populate all organizations added from directory
+    public void populateComboOrganization() {
+        comboOrg.removeAllItems();
+
+        for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+            if(organization instanceof VolunteerOrganization)
+            comboOrg.addItem(organization);
+            
+        }
+    }
+    //populate respective employees
+    public void populateComboEmployee(Organization organization){
+        comboEmp.removeAllItems();
+        
+        for (Employee employee : organization.getEmployeeDir().getEmployeeList()){
+            comboEmp.addItem(employee);
+        }
+    }
+    //populate respective roles
+    private void populateComboRole(Enterprise e){
+        comboRole.removeAllItems();
+        Organization organization = (Organization) comboOrg.getSelectedItem();
+        if(organization instanceof VolunteerOrganization){
+            comboRole.addItem(new VolunteerRole());
+        
+        }
+      
+    }
+    //populate username and roles in table
+    public void populateData() {
+
+        DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
+
+        model.setRowCount(0);
+
+        for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+            for (UserCredentials ua : organization.getUserCredentialsDir().getUserCredentialsList()) {
+                Object row[] = new Object[2];
+                row[0] = ua;
+                row[1] = ua.getRole();
+                ((DefaultTableModel) tblUser.getModel()).addRow(row);
+            }
+        }
     }
 
     /**
@@ -27,7 +93,6 @@ public class ManageUserCredentials extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -104,11 +169,14 @@ public class ManageUserCredentials extends javax.swing.JPanel {
         jLabel3.setText("Organization");
 
         comboOrg.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboOrg.setForeground(new java.awt.Color(153, 0, 153));
         comboOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboOrgActionPerformed(evt);
             }
         });
+
+        txtPassword.setForeground(new java.awt.Color(153, 0, 153));
 
         lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblPassword.setText("Password");
@@ -117,18 +185,24 @@ public class ManageUserCredentials extends javax.swing.JPanel {
         jLabel4.setText("Employee");
 
         comboEmp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboEmp.setForeground(new java.awt.Color(153, 0, 153));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Role");
 
         comboRole.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboRole.setForeground(new java.awt.Color(153, 0, 153));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(204, 204, 204)
+                .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,21 +213,22 @@ public class ManageUserCredentials extends javax.swing.JPanel {
                             .addComponent(comboOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(126, 126, 126)
+                                        .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(53, 53, 53))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,9 +246,9 @@ public class ManageUserCredentials extends javax.swing.JPanel {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboRole, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +259,6 @@ public class ManageUserCredentials extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBack.setText("BACK");
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -199,13 +273,13 @@ public class ManageUserCredentials extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(412, Short.MAX_VALUE)
+                .addContainerGap(330, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(147, 147, 147)
+                        .addGap(103, 103, 103)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(236, 236, 236))
+                        .addGap(292, 292, 292))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
@@ -218,25 +292,13 @@ public class ManageUserCredentials extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBack)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1902, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                        .addGap(103, 103, 103))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -245,35 +307,62 @@ public class ManageUserCredentials extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1902, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 700, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    //add the user
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
         // TODO add your handling code here:
-
+        if(txtName.getText().isEmpty()|| txtPassword.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Text Field Cannot be Empty");
+        }else{        
+            String userName = txtName.getText();
+        String password = txtPassword.getText();
+        if(Ecosystem.checkIfUsernameIsUnique(userName)){
+        Organization organization = (Organization) comboOrg.getSelectedItem();
+        Employee employee = (Employee) comboEmp.getSelectedItem();
+        Role role = (Role) comboRole.getSelectedItem();
+        
+        
+        if (organization instanceof VolunteerOrganization){
+           Volunteer vt = new Volunteer();
+            
+           vt.setVolunteerName(employee.getName());
+           
+           ((VolunteerOrganization) organization).getVolunteerList().getVolunteerList().add(vt);
+          
+        }
+        organization.getUserCredentialsDir().createUserCredentials(userName, password, employee, role);
+        populateData();
+        txtName.setText("");
+        txtPassword.setText("");
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Please enter unique username", "Warning", JOptionPane.WARNING_MESSAGE); 
+        }
+}
     }//GEN-LAST:event_btnAddUserActionPerformed
 
     private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
         // TODO add your handling code here:
-
+        Organization organization = (Organization) comboOrg.getSelectedItem();
+        if (organization != null){
+            populateComboEmployee(organization);
+            populateComboRole(enterprise);
+        }
     }//GEN-LAST:event_comboOrgActionPerformed
-
+    //go to previous page
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
@@ -288,7 +377,6 @@ public class ManageUserCredentials extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
