@@ -97,7 +97,6 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        txtUsername.setBackground(new java.awt.Color(229, 207, 239));
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(51, 51, 51));
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +135,6 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel1.setText("Username");
 
-        txtPassword.setBackground(new java.awt.Color(229, 207, 239));
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

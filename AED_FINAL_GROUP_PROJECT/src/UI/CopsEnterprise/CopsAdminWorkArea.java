@@ -44,7 +44,7 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         btnManageEmployee = new javax.swing.JButton();
-        btnManageUserAccount = new javax.swing.JButton();
+        btnManageUserCredentials = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnManageOrganization = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -86,11 +86,11 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnManageUserAccount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnManageUserAccount.setText(" User Credentials");
-        btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
+        btnManageUserCredentials.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageUserCredentials.setText(" User Credentials");
+        btnManageUserCredentials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageUserAccountActionPerformed(evt);
+                btnManageUserCredentialsActionPerformed(evt);
             }
         });
 
@@ -123,7 +123,7 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
                         .addGap(27, 27, 27)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManageOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageUserCredentials, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(100, 100, 100))
         );
@@ -140,7 +140,7 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
                     .addComponent(btnManageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnManageUserCredentials, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
         );
@@ -197,13 +197,13 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
-    private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
+    private void btnManageUserCredentialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserCredentialsActionPerformed
         // TODO add your handling code here:
         ManageUserCredentials mngUser = new ManageUserCredentials(userProcessContainer, enterprise);
         userProcessContainer.add("ManageUserAccount", mngUser);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnManageUserAccountActionPerformed
+    }//GEN-LAST:event_btnManageUserCredentialsActionPerformed
 
     private void btnManageOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrganizationActionPerformed
         // TODO add your handling code here:
@@ -217,7 +217,7 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageEmployee;
     private javax.swing.JButton btnManageOrganization;
-    private javax.swing.JButton btnManageUserAccount;
+    private javax.swing.JButton btnManageUserCredentials;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
