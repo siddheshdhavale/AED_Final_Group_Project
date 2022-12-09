@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.CSOEnterprise;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +16,15 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form CSOAdminWorkArea
      */
-    public CSOAdminWorkArea() {
+     private JPanel userProcessContainer;
+    private Ecosystem system;
+    private Enterprise enterprise;
+    
+    public CSOAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
+        this.enterprise=enterprise;
+        this.userProcessContainer=userProcessContainer;
+        this.system=system;
     }
 
     /**
@@ -56,7 +66,7 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Welcome, You're logged in as CSO Admin");
+        jLabel2.setText("Welcome, You're logged in as NGO Admin");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel3.setOpaque(false);
@@ -170,17 +180,26 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-   
+    ManageEmployee mngEmp = new ManageEmployee(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("ManageEmployee", mngEmp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserCredentialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserCredentialsActionPerformed
         // TODO add your handling code here:
-       
+       ManageUserCredentials mngUser = new ManageUserCredentials(userProcessContainer, enterprise);
+        userProcessContainer.add("ManageUserCredential", mngUser);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageUserCredentialsActionPerformed
 
     private void btnManageOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageOrganizationActionPerformed
         // TODO add your handling code here:
-      
+      ManageOrganization mngOrg = new ManageOrganization(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("ManageOrganization", mngOrg);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageOrganizationActionPerformed
 
 

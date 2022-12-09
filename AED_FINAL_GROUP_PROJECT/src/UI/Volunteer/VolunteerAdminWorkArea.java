@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.Volunteer;
-
+import Business.Enterprise.Enterprise;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +15,12 @@ public class VolunteerAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form VolunteerAdminWorkArea
      */
-    public VolunteerAdminWorkArea() {
+     private JPanel userProcessContainer;
+    private Enterprise enterprise;
+    public VolunteerAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
+          this.enterprise=enterprise;
+        this.userProcessContainer=userProcessContainer;
     }
 
     /**
@@ -156,12 +162,18 @@ public class VolunteerAdminWorkArea extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-   
+    ManageEmployee mngEmp = new ManageEmployee(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("ManageEmployee", mngEmp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserCredentialsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserCredentialsActionPerformed
         // TODO add your handling code here:
-        
+         ManageUserCredentials mngUser = new ManageUserCredentials(userProcessContainer, enterprise);
+        userProcessContainer.add("ManageUserAccount", mngUser);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageUserCredentialsActionPerformed
 
 

@@ -3,7 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.CSOEnterprise;
+import Business.Employee.Employee;
 
+import Business.Organization.CSOOrganization;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDir;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,10 +21,48 @@ public class ManageEmployee extends javax.swing.JPanel {
     /**
      * Creates new form ManageEmployee
      */
-    public ManageEmployee() {
+     private OrganizationDir orgdirectory;
+    private JPanel userProcessContainer;
+    
+    public ManageEmployee(JPanel userProcessContainer,OrganizationDir orgdirectory) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.orgdirectory=orgdirectory;
+        populateComboOrganization();
+        populateComboOrganizationEmp();
     }
+ //populate hospital employee table by adding employees
+    private void populateTbl(Organization organization){
+        DefaultTableModel model = (DefaultTableModel) tblEmp.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Employee employee : organization.getEmployeeDir().getEmployeeList()){
+            Object[] row = new Object[5];
+            row[0] = employee;
+            row[2] = employee.getId();
+            row[1] = organization.getName();
+            model.addRow(row);
+        }
+    }
+    //populate organization combo box
+    public void populateComboOrganization(){
+        comboOrg.removeAllItems();
+        
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            if(organization instanceof CSOOrganization)
+            comboOrg.addItem(organization);
+        }
+    }
+     //populate employee - ngo organization combo box
+    public void populateComboOrganizationEmp(){
+        comboOrgSelect.removeAllItems();
 
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            if(organization instanceof CSOOrganization)
+            comboOrgSelect.addItem(organization);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +76,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmployee = new javax.swing.JTable();
+        tblEmp = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         btnAddEmployee = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -39,7 +85,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         comboOrgSelect = new javax.swing.JComboBox();
         btnBack = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        comboOrganization = new javax.swing.JComboBox();
+        comboOrg = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -58,8 +104,8 @@ public class ManageEmployee extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        tblEmployee.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmp.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tblEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -75,7 +121,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblEmployee);
+        jScrollPane1.setViewportView(tblEmp);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel4.setOpaque(false);
@@ -152,10 +198,10 @@ public class ManageEmployee extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Organization");
 
-        comboOrganization.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        comboOrganization.addActionListener(new java.awt.event.ActionListener() {
+        comboOrg.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboOrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboOrganizationActionPerformed(evt);
+                comboOrgActionPerformed(evt);
             }
         });
 
@@ -171,7 +217,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(109, 109, 109)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(223, 223, 223)
@@ -190,7 +236,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(comboOrg, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -219,30 +265,53 @@ public class ManageEmployee extends javax.swing.JPanel {
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
-       
+           if(txtName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill the Empty fields");
+        }else{
+        
+        Organization organization =(Organization)comboOrgSelect.getSelectedItem();
+        String name = txtName.getText();
+        
+        organization.getEmployeeDir().createEmployee(name);
+        populateTbl(organization);
+        
+        txtName.setText("");
+      }
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
-       
+        char typedName = evt.getKeyChar();
+        if(!Character.isAlphabetic(typedName) && !Character.isWhitespace(typedName)){
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if(txtName.getText().length() > 255){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
+         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void comboOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrganizationActionPerformed
+    private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_comboOrganizationActionPerformed
+       Organization organization = (Organization) comboOrg.getSelectedItem();
+        if (organization != null){
+            populateTbl(organization);
+        }
+    }//GEN-LAST:event_comboOrgActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEmployee;
     private javax.swing.JButton btnBack;
+    private javax.swing.JComboBox comboOrg;
     private javax.swing.JComboBox comboOrgSelect;
-    private javax.swing.JComboBox comboOrganization;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,7 +320,7 @@ public class ManageEmployee extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEmployee;
+    private javax.swing.JTable tblEmp;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
