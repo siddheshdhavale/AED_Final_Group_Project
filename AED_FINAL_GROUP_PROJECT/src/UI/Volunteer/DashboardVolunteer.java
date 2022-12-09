@@ -3,7 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.Volunteer;
-
+import UI.EventCreatorWorkArea.*;
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.EventCreator.EventCreator;
+import Business.Organization.EventCreatorOrganization;
+import Business.Organization.Organization;
+import Business.Organization.VolunteerOrganization;
+import Business.UserCredentials.UserCredentials;
+import Business.Volunteer.Volunteer;
+import Business.TaskQueue.CSOTaskRequest;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskQueue;
+import Business.TaskQueue.TaskRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,10 +29,59 @@ public class DashboardVolunteer extends javax.swing.JPanel {
     /**
      * Creates new form DashboardVolunteer
      */
-    public DashboardVolunteer() {
+      private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    private Volunteer vm;
+    public DashboardVolunteer(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+          this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+       
+        for (Volunteer volunteer:((VolunteerOrganization)organization).getVolunteerList().getVolunteerList())
+        {
+            if (credentials.getEmployee().getName().equals(volunteer.getVolunteerName())) {
+                 vm=volunteer;
+                 
+                System.out.println("Volunteer Name" + vm.getVolunteerName());
+            }
+            
+        }
+        
+        
+            if(vm.getTaskQueue()== null){
+            TaskQueue w = new TaskQueue();
+            vm.setTaskQueue(w);
+            
+        }
+        populateTableEvent();
     }
-
+ public void populateTableEvent()
+    {
+         DefaultTableModel model = (DefaultTableModel) tblEventNGO.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof CSOTaskRequest){ 
+            Object[] row = new Object[10];
+            row[0] = work;
+            row[1] = ((CSOTaskRequest) work).getDescription();
+            row[2] =  work.getRequestDate();
+            row[3] = ((CSOTaskRequest) work).getLocation();
+            row[4] = ((CSOTaskRequest) work).getvRequired();
+            row[5] =  ((CSOTaskRequest) work).getvAcquired();
+            
+            model.addRow(row);
+           }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -241,13 +306,39 @@ public class DashboardVolunteer extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+          int selectedRow = tblEventNGO.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select the row to assign the account", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            CSOTaskRequest p = (CSOTaskRequest) tblEventNGO.getValueAt(selectedRow, 0);
+            txtTitle.setText(p.getTitle());
+            txtDesc.setText(p.getDescription());
+            txtLoc.setText(p.getLocation());
+            txtDate.setText(p.getRequestDate().toString());
+            txtVolunteer.setText(String.valueOf(p.getvRequired()));
+        }
         
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnJoinEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJoinEventActionPerformed
         // TODO add your handling code here:
         
+ int selectedRow = tblEventNGO.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select the row to assign the account", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+        CSOTaskRequest p = (CSOTaskRequest) tblEventNGO.getValueAt(selectedRow, 0);
+      
+        p.setvRequired(p.getvRequired()-1);
+        p.setvAcquired(p.getvAcquired()+1);
+        p.setVolunteer(vm);
 
+        JOptionPane.showMessageDialog(null, "You Successfully registered for an Event!");
+
+        populateTableEvent();
+
+        }
     }//GEN-LAST:event_btnJoinEventActionPerformed
 
 
