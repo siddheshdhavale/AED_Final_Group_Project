@@ -91,12 +91,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         comboOrg = new javax.swing.JComboBox();
 
-        jPanel2.setBackground(new java.awt.Color(243, 235, 255));
-
-        jPanel3.setBackground(new java.awt.Color(113, 88, 205));
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Employee");
 
@@ -132,11 +127,10 @@ public class ManageEmployee extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEmp);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24), new java.awt.Color(153, 0, 153))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel4.setOpaque(false);
 
         btnAddEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAddEmployee.setForeground(new java.awt.Color(153, 0, 153));
         btnAddEmployee.setText("Add Employee");
         btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +139,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 0, 153));
         jLabel2.setText("Name");
 
         txtName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -156,7 +149,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(153, 0, 153));
         jLabel3.setText("Organization");
 
         comboOrgSelect.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -206,7 +198,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(153, 0, 153));
         jLabel5.setText("Organization");
 
         comboOrg.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
