@@ -4,18 +4,68 @@
  * and open the template in the editor.
  */
 package UI.EventSeekerWorkArea;
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.EventCreator.EventCreator;
 
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskRequest;
+import Business.googlemaps.GoogleMapsViewer;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ghostdaddy16
  */
 public class EventSeekerWorkArea extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    EventCreator em;
+    
     /**
      * Creates new form EventSeekerWorkArea
      */
     public EventSeekerWorkArea() {
         initComponents();
+         this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        populateTableWorkQueue();
+    }
+      //populate victim request table
+     public void populateTableWorkQueue(){
+         DefaultTableModel model = (DefaultTableModel) tblEvent.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){ 
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
     }
 
     /**
@@ -214,12 +264,58 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
 
     private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed
         // TODO add your handling code here:
-       
+       if(txtSubject.getText().isEmpty() || txtDesc.getText().isEmpty() || txtLoc.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null," Empty fields !");
+        }else{
+
+        String subject = txtSubject.getText();
+        String desp = txtDesc.getText();
+        String location = txtLoc.getText();
+        
+        Date d = new Date();
+        SimpleDateFormat s = new SimpleDateFormat("MM/dd/YY");
+        s.format(d);
+        if(subject.equals("") || subject.isEmpty() && desp.equals("") || desp.isEmpty() && location.equals("")|| location.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, " enter valid request");
+            return;
+        }
+        
+        VictimTaskRequest req = new VictimTaskRequest();
+        req.setSubject(subject);
+        req.setDescription(desp);
+        req.setLocation(location);
+        req.setStatus("Requested");
+        req.setSender(credentials);
+        req.setRequestDate(d);
+        organization.gettaskQueue().getTaskRequestList().add(req);
+        credentials.getTaskQueue().getTaskRequestList().add(req);
+        system.gettaskQueue().getTaskRequestList().add(req);
+        
+        populateTableWorkQueue();
+        
+        txtSubject.setText("");
+        txtDesc.setText("");
+        txtLoc.setText("");
+        
+        
+        }
     }//GEN-LAST:event_btnPostActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
+       GoogleMapsViewer gmv=new GoogleMapsViewer();
+        JFrame mapsPanel = new JFrame();
+        mapsPanel.setBounds(10,10,700,600); 
+        mapsPanel.setTitle("Google Maps");
+        mapsPanel.setResizable(false);
+        
+        gmv.setSize(mapsPanel.getSize());
+        mapsPanel.add(gmv);
+        gmv.loadMap("html/maps.html");
+        
+        
+        mapsPanel.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
