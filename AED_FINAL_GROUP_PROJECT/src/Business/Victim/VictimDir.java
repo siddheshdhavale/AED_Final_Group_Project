@@ -18,7 +18,7 @@ public class VictimDir {
         
     }
 
-    public ArrayList<Victim> getChangeSeekerDirectory() {
+    public ArrayList<Victim> getChangeSeekerDir() {
         return changeSeekerDir;
     }
 

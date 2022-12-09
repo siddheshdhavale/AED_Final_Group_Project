@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package UI.EventSeeker;
-
+import Business.Enterprise.Enterprise;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author ghostdaddy16
@@ -14,8 +16,12 @@ public class EventSeekerAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form EventSeekerWorkArea
      */
-    public EventSeekerAdminWorkArea() {
+     private JPanel userProcessContainer;
+    private Enterprise enterprise;
+    public EventSeekerAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
+         this.enterprise=enterprise;
+        this.userProcessContainer=userProcessContainer;
     }
 
     /**
@@ -72,7 +78,7 @@ public class EventSeekerAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnManageUserAccount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnManageUserAccount.setText(" User Credentials");
+        btnManageUserAccount.setText(" User Account");
         btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageUserAccountActionPerformed(evt);
@@ -178,12 +184,19 @@ public class EventSeekerAdminWorkArea extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
+         ManageEmployee mngEmp = new ManageEmployee(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("SeekerManageEmployee", mngEmp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
         // TODO add your handling code here:
-     
+      ManageUserCredentials mngUser = new ManageUserCredentials(userProcessContainer, enterprise);
+        userProcessContainer.add("SeekerManageUserAccount", mngUser);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageUserAccountActionPerformed
 
 

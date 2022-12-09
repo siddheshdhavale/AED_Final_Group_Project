@@ -30,7 +30,7 @@ public class ManageUserCredentials extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Enterprise enterprise;
 
-    public ManageUserCredentials() {
+    public ManageUserCredentials(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
