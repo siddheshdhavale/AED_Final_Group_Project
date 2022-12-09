@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UI.EventCreator;
+
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDir;
 import java.awt.CardLayout;
@@ -108,7 +109,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblOrg);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 28), new java.awt.Color(153, 0, 153))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 28))); // NOI18N
         jPanel4.setOpaque(false);
 
         btnAddOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
