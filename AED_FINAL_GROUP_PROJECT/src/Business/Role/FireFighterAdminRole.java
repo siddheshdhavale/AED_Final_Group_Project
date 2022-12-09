@@ -17,7 +17,7 @@ public class FireFighterAdminRole extends Role{
       //overriding main panel with firefighter admin work area whenever firefighter admin role is called
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system){
-        return new FireFighterWorkArea(userProcessContainer,enterprise,system);
+        return new FireFighterAdminWorkArea(userProcessContainer,enterprise,system);
     }   
         @Override
         public String toString()

@@ -24,7 +24,7 @@ public class FireFighterAdminWorkArea extends javax.swing.JPanel {
     private Ecosystem system;
     private Enterprise enterprise;
     
-    public FireFighterAdminWorkArea() {
+    public FireFighterAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
         this.enterprise=enterprise;
         this.userProcessContainer=userProcessContainer;
