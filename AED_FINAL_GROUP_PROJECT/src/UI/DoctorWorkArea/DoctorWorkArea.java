@@ -5,16 +5,64 @@
  */
 
 package UI.DoctorWorkArea;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.DocOrganization;
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskRequest;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ghostdaddy16
  */
 public class DoctorWorkArea extends javax.swing.JPanel {
-
+        private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    DocOrganization docOrganization;
     /** Creates new form DoctorWorkArea */
-    public DoctorWorkArea() {
+    public DoctorWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        
+         populateDoctorTable();
+        
+    }
+     public void populateDoctorTable(){
+
+         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){
+               if((work.getStatus().equalsIgnoreCase("Assigned To Doctor"))||(work.getStatus().equalsIgnoreCase("Doctor assigned the Request"))){
+                   
+               
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
+        }
     }
 
     /** This method is called from within the constructor to
@@ -144,12 +192,43 @@ public class DoctorWorkArea extends javax.swing.JPanel {
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-      
+      int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest cswr = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equalsIgnoreCase("Assigned To Doctor")){
+            cswr.setStatus("Doctor assigned the Request");
+            cswr.setReciever(credentials);
+
+            populateDoctorTable();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-        
+          int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row.", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(p.getStatus().equalsIgnoreCase("Doctor assigned the Request")){
+            p.setStatus("Complete");
+            p.setReciever(credentials);
+            JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+            populateDoctorTable();
+             }
+             else{
+                  JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+             }
+
+        }  
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 
