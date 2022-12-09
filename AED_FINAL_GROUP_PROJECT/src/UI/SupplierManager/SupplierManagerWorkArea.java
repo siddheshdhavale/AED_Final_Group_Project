@@ -20,7 +20,7 @@ public class SupplierManagerWorkArea extends javax.swing.JPanel {
         private JPanel userProcessContainer;
     private Ecosystem system;
     private Enterprise enterprise;
-    public SupplierManagerWorkArea() {
+    public SupplierManagerWorkArea(JPanel userProcessContainer,Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
           this.enterprise=enterprise;
         this.userProcessContainer=userProcessContainer;
