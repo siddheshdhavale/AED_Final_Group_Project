@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package UI.SupplierManager;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author ghostdaddy16
@@ -14,8 +17,15 @@ public class SupplierManagerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form SupplierManagerWorkArea
      */
+        private JPanel userProcessContainer;
+    private Ecosystem system;
+    private Enterprise enterprise;
     public SupplierManagerWorkArea() {
         initComponents();
+          this.enterprise=enterprise;
+        this.userProcessContainer=userProcessContainer;
+        this.system=system;
+       
     }
 
     /**
@@ -175,12 +185,18 @@ public class SupplierManagerWorkArea extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-        
+           ManageEmployee mngEmp = new ManageEmployee(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("ManageEmployee", mngEmp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
         // TODO add your handling code here:
-       
+               ManageUserCredentials mngUser = new ManageUserCredentials(userProcessContainer, enterprise);
+        userProcessContainer.add("ManageUserAccount", mngUser);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageUserAccountActionPerformed
 
 

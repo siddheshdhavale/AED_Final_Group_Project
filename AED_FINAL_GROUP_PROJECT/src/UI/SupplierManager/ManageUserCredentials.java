@@ -4,18 +4,79 @@
  * and open the template in the editor.
  */
 package UI.SupplierManager;
-
+import Business.Ecosystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Organization.SupplierOrganization;
+import Business.Supplier.Supplier;
+import Business.Role.SupplierRole;
+import Business.Role.Role;
+import Business.UserCredentials.UserCredentials;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ghostdaddy16
  */
 public class ManageUserCredentials extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form ManageUserCredentials
      */
-    public ManageUserCredentials() {
+    private JPanel userProcessContainer;
+    private Enterprise enterprise;
+    public ManageUserCredentials(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
+          this.userProcessContainer=userProcessContainer;
+        this.enterprise=enterprise;
+        populateComboOrganization();
+        populateData();
+
+    }
+      //populate all organizations added from directory
+    public void populateComboOrganization() {
+        comboOrg.removeAllItems();
+
+        for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+            comboOrg.addItem(organization);
+        }
+    }
+    //populate respective employees
+    public void populateComboEmployee(Organization organization){
+        comboEmp.removeAllItems();
+        
+        for (Employee employee : organization.getEmployeeDir().getEmployeeList()){
+            comboEmp.addItem(employee);
+        }
+    }
+    //populate respective roles
+    private void populateComboRole(Enterprise e){
+        comboRole.removeAllItems();
+        Organization organization = (Organization) comboOrg.getSelectedItem();
+        if(organization instanceof SupplierOrganization){
+            comboRole.addItem(new SupplierRole());
+           
+        }
+      
+    }
+     //populate username and roles in table
+    public void populateData() {
+
+        DefaultTableModel model = (DefaultTableModel) tblUser.getModel();
+
+        model.setRowCount(0);
+
+        for (Organization organization : enterprise.getOrganizationDir().getOrganizationList()) {
+            for (UserCredentials ua : organization.getUserCredentialsDir().getUserCredentialsList()) {
+                Object row[] = new Object[2];
+                row[0] = ua;
+                row[1] = ua.getRole();
+                ((DefaultTableModel) tblUser.getModel()).addRow(row);
+            }
+        }
     }
 
     /**
@@ -272,17 +333,47 @@ public class ManageUserCredentials extends javax.swing.JPanel {
 
     private void btnAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUserActionPerformed
         // TODO add your handling code here:
-        
+                if(txtName.getText().isEmpty()|| txtPassword.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null," empty fields !");
+        }else{
+            String userName = txtName.getText();
+            String password = txtPassword.getText();
+            if(Ecosystem.checkIfUsernameIsUnique(userName)){
+                Organization organization = (Organization) comboOrg.getSelectedItem();
+                Employee employee = (Employee) comboEmp.getSelectedItem();
+                Role role = (Role) comboRole.getSelectedItem();
+                if (organization instanceof SupplierOrganization){
+                    Supplier p= new Supplier();
+
+                    p.setsName(employee.getName());
+                    ((SupplierOrganization) organization).getSupplierList().getSupplierList().add(p);
+
+                    }
+                organization.getUserCredentialsDir().createUserCredentials(userName, password, employee, role);
+                populateData();
+                txtName.setText("");
+                txtPassword.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Username should be unique", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAddUserActionPerformed
 
     private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
         // TODO add your handling code here:
-       
+          Organization organization = (Organization) comboOrg.getSelectedItem();
+        if (organization != null){
+            populateComboEmployee(organization);
+            populateComboRole(enterprise);
+        }
     }//GEN-LAST:event_comboOrgActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
