@@ -194,7 +194,6 @@
                     <LineBorder/>
                   </Border>
                   <Font PropertyName="font" name="Segoe UI" size="24" style="0"/>
-                  <Color PropertyName="color" blue="99" green="0" red="99" type="rgb"/>
                 </TitledBorder>
               </Border>
             </Property>
