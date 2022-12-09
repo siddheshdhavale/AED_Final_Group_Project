@@ -3,20 +3,69 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.CSOManager;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Supplier.Supplier;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.SupplierTaskRequest;
+import Business.TaskQueue.TaskRequest;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 /**
  *
  * @author yashrevadekar
  */
 public class SupplyRequest extends javax.swing.JPanel {
-
+  private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    private Supplier s;
     /**
      * Creates new form SupplyRequest
      */
-    public SupplyRequest() {
+    public SupplyRequest(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
-    }
+         this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=(Organization)organization;
+        this.enterprise=enterprise;
+        this.system=system;
 
+        populateTableCSOWorkQueue();
+    }
+    public void populateTableCSOWorkQueue()
+    {
+      DefaultTableModel model = (DefaultTableModel) tblReq.getModel();
+        
+        model.setRowCount(0);
+        
+       
+        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+           if(work instanceof SupplierTaskRequest){ 
+            Object[] row = new Object[10];
+            row[0] = ((SupplierTaskRequest) work).getRtype();
+            row[1] = ((SupplierTaskRequest) work).getReq();
+            row[2] = ((SupplierTaskRequest) work).getQuantity();
+            row[3] = work;
+            row[4] = work.getSender();
+            
+            
+            model.addRow(row);
+           }
+        }   
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,28 +288,107 @@ public class SupplyRequest extends javax.swing.JPanel {
 
     private void txtReqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReqKeyTyped
         // TODO add your handling code here:
-       
+           char typedReq = evt.getKeyChar();
+        if(!Character.isAlphabetic(typedReq) && !Character.isWhitespace(typedReq)){
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if(txtReq.getText().length() > 255){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtReqKeyTyped
 
     private void txtQntKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQntKeyTyped
         // TODO add your handling code here:
-        
+         char typedQnt = evt.getKeyChar();
+        if(!Character.isDigit(typedQnt)){
+            evt.consume();
+        }
+        //Restrict the length to 5 
+        if(txtQnt.getText().length() > 4){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtQntKeyTyped
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+     try{ 
+        String rType = comboType.getSelectedItem().toString();
+        String req =   txtReq.getText();
+        int quantity = Integer.parseInt(txtQnt.getText());
+        if(rType.equals("") || rType.isEmpty() && req.equals("") || req.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Please enter valid request");
+            return;
+        }
+        
+        SupplierTaskRequest rqst = new SupplierTaskRequest();
+        
+        rqst.setRtype(rType);
+        rqst.setReq(req);
+        rqst.setQuantity(quantity);
+        rqst.setStatus("Requested");
+        rqst.setSender(credentials);
+        organization.gettaskQueue().getTaskRequestList().add(rqst);
+        credentials.getTaskQueue().getTaskRequestList().add(rqst);
+        system.gettaskQueue().getTaskRequestList().add(rqst);
      
+        
+        populateTableCSOWorkQueue();
+        
+        txtReq.setText("");
+        txtQnt.setText("");
+        }
+       
+        catch(NumberFormatException e){}
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBarChartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarChartActionPerformed
         // TODO add your handling code here:
-      
+       DefaultCategoryDataset d = new DefaultCategoryDataset();
+        
+        int b=0;
+        int c=0;
+        int m=0;
+        int n=0;
+        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+           if(work instanceof SupplierTaskRequest)
+           {
+              
+              if(((SupplierTaskRequest) work).getRtype().equals("Food")){
+                  b=b+((SupplierTaskRequest) work).getQuantity();
+              }
+              if(((SupplierTaskRequest) work).getRtype().equals("Clothes")){
+                  c=c+((SupplierTaskRequest) work).getQuantity();
+              }
+              if(((SupplierTaskRequest) work).getRtype().equals("Medicine")){
+                  m=m+((SupplierTaskRequest) work).getQuantity();
+              }
+              if(((SupplierTaskRequest) work).getRtype().equals("Education")){
+                  n=n+((SupplierTaskRequest) work).getQuantity();
+              }
+           }
+        }
+           d.setValue(b, "Request Type","Food");
+           d.setValue(c, "Request Type","Clothes");
+           d.setValue(m, "Request Type","Medicine");
+           d.setValue(n, "Request Type","Education"); 
+           
+           
+           JFreeChart chart = ChartFactory.createBarChart("Request Fulfilled", "Request Type", "type", d, PlotOrientation.VERTICAL, false, true, false);
+           CategoryPlot p = chart.getCategoryPlot();
+           p.setRangeGridlinePaint(Color.black);
+           ChartFrame f = new ChartFrame("Request Analysis",chart);
+           f.setVisible(true);
+           f.setSize(500,400);
     }//GEN-LAST:event_btnBarChartActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-       
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 

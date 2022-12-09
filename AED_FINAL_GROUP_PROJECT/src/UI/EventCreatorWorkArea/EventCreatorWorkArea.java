@@ -4,20 +4,72 @@
  * and open the template in the editor.
  */
 package UI.EventCreatorWorkArea;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.EventCreator.EventCreator;
+import Business.Organization.EventCreatorOrganization;
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskQueue;
+import Business.TaskQueue.TaskRequest;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ghostdaddy16
  */
 public class EventCreatorWorkArea extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    EventCreator em;
     /**
      * Creates new form EventCreatorWorkArea
      */
-    public EventCreatorWorkArea() {
+    public EventCreatorWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+         this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        
+        for (EventCreator eventmaker : ((EventCreatorOrganization)organization).getChangemakerlist().getChangeMakerDirectory()) {
+            if (credentials.getEmployee().getName().equals(eventmaker.getName())) {
+                 em=eventmaker;
+            }
+        }
+        if (em.getTaskQueue() == null) {
+            TaskQueue w = new TaskQueue();
+            em.setTaskQueue(w);
+        }
+        
+        populateTableTaskQueue();
     }
-
+      public void populateTableTaskQueue(){
+         DefaultTableModel model = (DefaultTableModel) tblEvent.getModel();
+        
+        model.setRowCount(0);
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){ 
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,10 +97,10 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        btnPolice = new javax.swing.JButton();
+        btnCops = new javax.swing.JButton();
         btnHealth = new javax.swing.JButton();
         btnFire = new javax.swing.JButton();
-        btnNGO = new javax.swing.JButton();
+        btnCSO = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -190,11 +242,11 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Emergency Services", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24), new java.awt.Color(153, 0, 153))); // NOI18N
         jPanel5.setOpaque(false);
 
-        btnPolice.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnPolice.setText("Police Department");
-        btnPolice.addActionListener(new java.awt.event.ActionListener() {
+        btnCops.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCops.setText("Cops Department");
+        btnCops.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPoliceActionPerformed(evt);
+                btnCopsActionPerformed(evt);
             }
         });
 
@@ -221,7 +273,7 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPolice, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCops, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFire, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -230,7 +282,7 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnPolice, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCops, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(btnHealth, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -238,11 +290,11 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        btnNGO.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnNGO.setText("NGO");
-        btnNGO.addActionListener(new java.awt.event.ActionListener() {
+        btnCSO.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCSO.setText("CSO");
+        btnCSO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNGOActionPerformed(evt);
+                btnCSOActionPerformed(evt);
             }
         });
 
@@ -256,14 +308,14 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(btnNGO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCSO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNGO, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCSO, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -334,38 +386,160 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-      
+        int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            
+            
+            VictimTaskRequest p = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            
+            txtSubject.setText(p.getSubject());
+            txtDesc.setText(p.getDescription());
+            txtLoc.setText(p.getLocation());
+        }
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnAssignToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignToActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            
+            if(cswr.getStatus().equalsIgnoreCase("Requested")){
+
+            cswr.setStatus("Pending");
+            cswr.setReciever(credentials);
+
+            populateTableTaskQueue();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Inavalid Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnAssignToActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest p = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+           
+            if(p.getStatus().equalsIgnoreCase("Pending")){
+
+
+                    p.setStatus("Complete");
+                    JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+                    populateTableTaskQueue();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnCompleteActionPerformed
 
-    private void btnPoliceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliceActionPerformed
+    private void btnCopsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopsActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnPoliceActionPerformed
+         int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equals("Assigned to the Police")){
+                JOptionPane.showMessageDialog(null, "This request is already assigned to Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+               if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
+            JOptionPane.showMessageDialog(null, "Assigned to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            cswr.setStatus("Assigned To Police");
+            populateTableTaskQueue();
+            }
+               else{
+                   JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+               }
+            }
+            
+        }
+    }//GEN-LAST:event_btnCopsActionPerformed
 
     private void btnHealthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHealthActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Doctor", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else{
+            
+            VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equals("Assigned To Doctor")){
+                JOptionPane.showMessageDialog(null, "This request is already assigned to Doctor", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            
+            else{
+                
+            if(cswr.getStatus().equalsIgnoreCase("Requested")){
+            JOptionPane.showMessageDialog(null, "Assigned to the Doctor");
+            cswr.setStatus("Assigned To Doctor");
+
+            populateTableTaskQueue();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+    } 
+        }
     }//GEN-LAST:event_btnHealthActionPerformed
 
     private void btnFireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFireActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equals("Assigned to the FireMan")){
+                JOptionPane.showMessageDialog(null, "This request is already assigned to FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
+                   
+                JOptionPane.showMessageDialog(null, "Assigned to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
+                cswr.setStatus("Assigned To FireMan");
+                populateTableTaskQueue();
+            }
+                else{
+                     JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnFireActionPerformed
 
-    private void btnNGOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNGOActionPerformed
+    private void btnCSOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCSOActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnNGOActionPerformed
+       int selectedRow = tblEvent.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the NGO", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            
+
+            VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equalsIgnoreCase("Requested")){
+            cswr.setStatus("Assigned To NGO");
+            populateTableTaskQueue();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnCSOActionPerformed
 
     private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubjectActionPerformed
         // TODO add your handling code here:
@@ -374,11 +548,11 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssignTo;
+    private javax.swing.JButton btnCSO;
     private javax.swing.JButton btnComplete;
+    private javax.swing.JButton btnCops;
     private javax.swing.JButton btnFire;
     private javax.swing.JButton btnHealth;
-    private javax.swing.JButton btnNGO;
-    private javax.swing.JButton btnPolice;
     private javax.swing.JButton btnView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
