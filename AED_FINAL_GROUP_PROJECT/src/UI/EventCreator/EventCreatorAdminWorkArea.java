@@ -4,7 +4,12 @@
  * and open the template in the editor.
  */
 package UI.EventCreator;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author ghostdaddy16
@@ -14,8 +19,18 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form EventCreatorAdminWorkArea
      */
-    public EventCreatorAdminWorkArea() {
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    
+    public EventCreatorAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
+         this.userProcessContainer=userProcessContainer;
+       
+        this.enterprise=enterprise;
+       
     }
 
     /**
@@ -72,7 +87,7 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnManageUserAccount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnManageUserAccount.setText(" User Credentials");
+        btnManageUserAccount.setText(" User Account");
         btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageUserAccountActionPerformed(evt);
@@ -175,12 +190,20 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-      
+       ManageEmployee manageEmployeeJPanel = new ManageEmployee(userProcessContainer, enterprise.getOrganizationDir());
+        userProcessContainer.add("MakerManageEmployee", manageEmployeeJPanel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeeActionPerformed
 
     private void btnManageUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserAccountActionPerformed
         // TODO add your handling code here:
-     
+       ManageUserCredentials muajp = new ManageUserCredentials(userProcessContainer, enterprise);
+        userProcessContainer.add("MakerManageUserAccount", muajp);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageUserAccountActionPerformed
 
 

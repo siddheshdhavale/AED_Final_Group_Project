@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package UI.EventCreator;
-
+import Business.Employee.Employee;
+import Business.Organization.EventCreatorOrganization;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDir;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ghostdaddy16
@@ -14,10 +21,49 @@ public class ManageEmployee extends javax.swing.JPanel {
     /**
      * Creates new form ManageEmployee
      */
-    public ManageEmployee() {
+        private OrganizationDir orgdirectory;
+    private JPanel userProcessContainer;
+    public ManageEmployee(JPanel userProcessContainer,OrganizationDir orgdirectory) {
         initComponents();
+         initComponents();   
+        this.userProcessContainer=userProcessContainer;
+        this.orgdirectory=orgdirectory;
+        populateComboOrganization();
+        populateComboOrganizationEmp();
     }
-
+    //populate event maker employee table by adding employees
+    private void populateTbl(Organization organization){
+        DefaultTableModel model = (DefaultTableModel) tblEmp.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Employee employee : organization.getEmployeeDir().getEmployeeList()){
+            Object[] row = new Object[5];
+            row[0] = employee;
+            row[2] = employee.getId();
+            row[1] = organization.getName();
+            model.addRow(row);
+        }
+    }
+    //populate organization combo box
+    public void populateComboOrganization(){
+        comboOrg.removeAllItems();
+        
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            if(organization instanceof EventCreatorOrganization)
+            comboOrg.addItem(organization);
+            
+        }
+    }
+     public void populateComboOrganizationEmp(){
+        comboOrgSelect.removeAllItems();
+        
+        for (Organization organization : orgdirectory.getOrganizationList()){
+             if(organization instanceof EventCreatorOrganization)
+            comboOrgSelect.addItem(organization);
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +90,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         comboOrg = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Employee");
 
@@ -143,7 +190,6 @@ public class ManageEmployee extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBack.setText("image bacck");
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -243,21 +289,46 @@ public class ManageEmployee extends javax.swing.JPanel {
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
+           if(txtName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null," Empty fields");
+        }else{
+        
+        Organization organization =(Organization)comboOrgSelect.getSelectedItem();
+        String name = txtName.getText();
+        
+        organization.getEmployeeDir().createEmployee(name);
+        populateTbl(organization);
+        
+        txtName.setText("");
+      }
         
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
-     
+     char typedName = evt.getKeyChar();
+        if(!Character.isAlphabetic(typedName) && !Character.isWhitespace(typedName)){
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if(txtName.getText().length() > 255){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-      
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
         // TODO add your handling code here:
+           Organization organization = (Organization) comboOrg.getSelectedItem();
+        if (organization != null){
+            populateTbl(organization);
+        }
         
     }//GEN-LAST:event_comboOrgActionPerformed
 
