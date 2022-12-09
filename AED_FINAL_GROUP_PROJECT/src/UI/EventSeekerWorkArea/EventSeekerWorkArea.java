@@ -36,7 +36,7 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form EventSeekerWorkArea
      */
-    public EventSeekerWorkArea() {
+    public EventSeekerWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
          this.userProcessContainer=userProcessContainer;
         this.credentials=credentials;
