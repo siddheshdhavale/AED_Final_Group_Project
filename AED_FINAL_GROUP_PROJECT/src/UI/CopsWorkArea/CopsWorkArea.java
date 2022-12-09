@@ -4,6 +4,16 @@
  */
 package UI.CopsWorkArea;
 
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Organization.CopsOrganization;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskRequest;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,10 +23,50 @@ public class CopsWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form CopsWorkArea
      */
-    public CopsWorkArea() {
+     private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    CopsOrganization copsOrganization;
+    
+    public CopsWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+         this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        
+         populateCopsTable();
     }
+//victim request to police is populated here
+    public void populateCopsTable(){
 
+         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){
+               if((work.getStatus().equalsIgnoreCase("Assigned To Cops"))||(work.getStatus().equalsIgnoreCase("Cops assigned the Request"))){
+                   
+               
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +87,7 @@ public class CopsWorkArea extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cops Work Area");
+        jLabel1.setText("Police Work Area");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,12 +195,42 @@ public class CopsWorkArea extends javax.swing.JPanel {
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-      
+      int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest cswr = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equalsIgnoreCase("Assigned To Police")){ 
+            cswr.setStatus("Police assigned the Request");
+            cswr.setReciever(credentials);
+
+            populateCopsTable();
+            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-      
+       int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+             if(p.getStatus().equalsIgnoreCase("Police assigned the Request")){ 
+            p.setStatus("Complete");
+            p.setReciever(credentials);
+            JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+            populateCopsTable();
+             }
+             else{
+                  JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+             }
+        } 
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 
