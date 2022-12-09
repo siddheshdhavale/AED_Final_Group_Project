@@ -5,6 +5,20 @@
  */
 package UI.Supplier;
 
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Organization.SupplierOrganization;
+import Business.Supplier.Item;
+import Business.Supplier.Supplier;
+import Business.TaskQueue.SupplierTaskRequest;
+import Business.TaskQueue.TaskQueue;
+import Business.TaskQueue.TaskRequest;
+import Business.UserCredentials.UserCredentials;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ghostdaddy16
@@ -14,8 +28,69 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form SupplierWorkArea
      */
-    public SupplierWorkArea() {
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    private Supplier s;
+
+    public SupplierWorkArea(JPanel userProcessContainer, UserCredentials credentials, Organization organization, Enterprise enterprise, Ecosystem system) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.credentials = credentials;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.system = system;
+
+        for (Supplier supplier : ((SupplierOrganization) organization).getSupplierList().getSupplierList()) {
+            if (credentials.getEmployee().getName().equals(supplier.getsName())) {
+                s = supplier;
+            }
+        }
+
+        if (s.getTaskQueue() == null) {
+            TaskQueue w = new TaskQueue();
+            s.setTaskQueue(w);
+        }
+        populateTableSupply();
+        populateTableCreate();
+    }
+
+    //provide the required supplies on request table
+    public void populateTableSupply() {
+        DefaultTableModel model = (DefaultTableModel) tblSupplyReq.getModel();
+
+        model.setRowCount(0);
+
+        for (TaskRequest task : system.gettaskQueue().getTaskRequestList()) {
+            if (task instanceof SupplierTaskRequest) {
+                Object[] row = new Object[10];
+                row[0] = ((SupplierTaskRequest) task).getRtype();
+                row[1] = ((SupplierTaskRequest) task).getReq();
+                row[2] = ((SupplierTaskRequest) task).getQuantity();
+                row[3] = task;
+                row[4] = task.getSender();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    //create supply request
+    public void populateTableCreate() {
+
+        DefaultTableModel model = (DefaultTableModel) tblCreate.getModel();
+
+        model.setRowCount(0);
+        for (Item item : s.getItemDir().getSupplyList()) {
+            Object[] row = new Object[10];
+            row[0] = item.getRequirementType();
+            row[1] = item.getRequirement();
+            row[2] = item.getQuantity();
+            model.addRow(row);
+        }
+
     }
 
     /**
@@ -31,7 +106,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProvideReq = new javax.swing.JTable();
+        tblSupplyReq = new javax.swing.JTable();
         btnComplete = new javax.swing.JButton();
         btnAssign = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -63,8 +138,8 @@ public class SupplierWorkArea extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
 
-        tblProvideReq.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tblProvideReq.setModel(new javax.swing.table.DefaultTableModel(
+        tblSupplyReq.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tblSupplyReq.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -80,7 +155,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblProvideReq);
+        jScrollPane1.setViewportView(tblSupplyReq);
 
         btnComplete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnComplete.setText("Complete");
@@ -263,31 +338,125 @@ public class SupplierWorkArea extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //assign the supply to supplier
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
-        
+
+        int selectedRow = tblSupplyReq.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            SupplierTaskRequest pwr = (SupplierTaskRequest) tblSupplyReq.getValueAt(selectedRow, 3);
+            if (pwr.getReciever() != null) {
+                if (pwr.getStatus().equals("Pending")) {
+                    UserCredentials a = pwr.getSender();
+                    int temp = 0;
+                    if (s.getItemDir().getSupplyList().size() <= 0) {
+                        JOptionPane.showMessageDialog(null, "No Stock available. Request from Provider");
+                        return;
+                    }
+                    for (Item item : s.getItemDir().getSupplyList()) {
+
+                        if (pwr.getReq().equals(item.getRequirement()) && pwr.getRtype().equals(item.getRequirementType())) {
+
+                            if (item.getQuantity() - pwr.getQuantity() < 0) {
+                                JOptionPane.showMessageDialog(null, "Not enough supply. Wait for sometime");
+                                return;
+                            }
+                            item.setQuantity(item.getQuantity() - pwr.getQuantity());
+                            temp = 1;
+                        }
+                    }
+
+                    if (temp == 1) {
+                        pwr.setStatus("Complete");
+                        JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+                    } else {
+                        pwr.setStatus("Requested");
+                        JOptionPane.showMessageDialog(null, "No Stock Available, Request Failed !!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    populateTableSupply();
+                    populateTableCreate();
+                } else {
+                    JOptionPane.showMessageDialog(null, "You cannot complete it two times.", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please assign first", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+
 
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tblSupplyReq.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            SupplierTaskRequest nswr = (SupplierTaskRequest) tblSupplyReq.getValueAt(selectedRow, 3);
+
+            nswr.setStatus("Pending");
+            nswr.setReciever(credentials);
+
+            populateTableSupply();
+
+        }
 
     }//GEN-LAST:event_btnAssignActionPerformed
 
+    //text validation
     private void txtReqKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReqKeyTyped
         // TODO add your handling code here:
-        
+        char typedReq = evt.getKeyChar();
+        if (!Character.isAlphabetic(typedReq) && !Character.isWhitespace(typedReq)) {
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if (txtReq.getText().length() > 255) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtReqKeyTyped
 
+    //quntity validation
     private void txtQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuantityKeyTyped
         // TODO add your handling code here:
-        
+        char typedQnt = evt.getKeyChar();
+        if (!Character.isDigit(typedQnt)) {
+            evt.consume();
+        }
+        //Restrict the length to 5 
+        if (txtQuantity.getText().length() > 4) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtQuantityKeyTyped
 
+    //create the request for supplies
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        
+        String type = comboType.getSelectedItem().toString();
+        String req = txtReq.getText();
+        int quantity = Integer.parseInt(txtQuantity.getText());
+
+        if (req.equals("") || req.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please create requirement");
+            return;
+        }
+
+        Item item = s.getItemDir().addSupply();
+
+        item.setRequirementType(type);
+        item.setRequirement(req);
+        item.setQuantity(quantity);
+
+        populateTableCreate();
+
+        txtReq.setText("");
+        txtQuantity.setText("");
     }//GEN-LAST:event_btnCreateActionPerformed
 
 
@@ -307,7 +476,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblCreate;
-    private javax.swing.JTable tblProvideReq;
+    private javax.swing.JTable tblSupplyReq;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtReq;
     // End of variables declaration//GEN-END:variables

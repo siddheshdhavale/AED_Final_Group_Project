@@ -5,6 +5,13 @@
  */
 package UI.HospitalEnterprise;
 
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDir;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ghostdaddy16
@@ -14,10 +21,39 @@ public class ManageOrganization extends javax.swing.JPanel {
     /**
      * Creates new form ManageOrganization
      */
-    public ManageOrganization() {
+    private OrganizationDir orgdirectory;
+    private JPanel userProcessContainer;
+    
+    public ManageOrganization(JPanel userProcessContainer,OrganizationDir orgdirectory) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.orgdirectory=orgdirectory;
+        populateTbl();
+        populateCmb();
     }
 
+    //populate newly added organization
+     private void populateTbl(){
+        
+        DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            Object[] row = new Object[3];
+            row[2] = organization.getOrganizationCode();
+            row[0] = organization.getOrgName();
+            row[1]=  organization.getName();
+            
+            model.addRow(row);
+        }
+    }
+     //populate hospital organization in combo box
+    private void populateCmb(){
+        comboOrg.removeAllItems();
+        comboOrg.addItem(Organization.Type.Doctor);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -195,11 +231,20 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //add an organization
     private void btnAddOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrganizationActionPerformed
         // TODO add your handling code here:
 
+         if(txtName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill the Empty fields");
+        }else{ 
+        Organization.Type type=(Organization.Type) comboOrg.getSelectedItem();
+        orgdirectory.createOrganization(type,txtName.getText());
+        populateTbl();
+        }
     }//GEN-LAST:event_btnAddOrganizationActionPerformed
 
+    //go to previous page
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
         char typedName = evt.getKeyChar();
@@ -215,6 +260,9 @@ public class ManageOrganization extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
 
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
