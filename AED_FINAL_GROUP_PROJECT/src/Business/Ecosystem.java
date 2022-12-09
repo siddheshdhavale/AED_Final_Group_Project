@@ -60,5 +60,33 @@ public class Ecosystem extends Organization {
         return role;
     
     }
+    public static boolean checkIfUsernameIsUnique(String username)
+    {
+        for(Network n : business.getNetworkList())
+        {
+            for(Enterprise e : n.getEnterpriseDir().getEnterpriseList())
+            {
+                for(UserCredentials ua : e.getUserCredentialsDir().getUserCredentialsList())
+                {
+                    if(ua.getUsername().equals(username))
+                    {
+                        return false;
+                    }
+                }
+                
+                for(Organization o : e.getOrganizationDir().getOrganizationList())
+                {
+                    for(UserCredentials ua : o.getUserCredentialsDir().getUserCredentialsList())
+                    {
+                        if(ua.getUsername().equals(username))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
     
 }

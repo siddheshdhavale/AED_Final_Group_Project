@@ -3,7 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SysAdmin;
-
+import Business.Ecosystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Role.CommAdminRole;
+import Business.Role.DocAdminRole;
+import Business.Role.FireFighterAdminRole;
+import Business.Role.CSOAdminRole;
+import Business.Role.CopsAdminRole;
+import Business.Role.SupplierAdminRole;
+import Business.UserCredentials.UserCredentials;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +28,49 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
     /**
      * Creates new form ManageEnterpriseAdmin
      */
-    public ManageEnterpriseAdmin() {
+    private JPanel panelWorkArea;
+    private Ecosystem system;
+    public ManageEnterpriseAdmin(JPanel userProcessContainer,Ecosystem system) {
         initComponents();
+        this.panelWorkArea=userProcessContainer;
+        this.system=system;
+        populateTableEnterpriseAdmin();
+        populateComboBoxNetwork();
+    }
+    //populate admins
+    private void populateTableEnterpriseAdmin() {
+        DefaultTableModel model = (DefaultTableModel) tblEnterprise.getModel();
+
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
+                for (UserCredentials usercredentials : enterprise.getUserCredentialsDir().getUserCredentialsList()) {
+                    Object[] row = new Object[3];
+                    row[0] = enterprise.getName();
+                    row[1] = network.getName();
+                    row[2] = usercredentials;
+
+                    model.addRow(row);
+                }
+            }
+        }
+    }
+    //populate user admins
+    private void populateComboBoxNetwork() {
+        comboNetwork.removeAllItems();
+
+        for (Network network : system.getNetworkList()) {
+            comboNetwork.addItem(network);
+        }
+    }
+    //populate enterprise - employee combo
+    private void populateComboBoxEnterprise(Network network) {
+        comboType.removeAllItems();
+
+        for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
+            comboType.addItem(enterprise);
+        }
+
     }
 
     /**
@@ -252,22 +308,83 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-       
+       Enterprise enterprise = (Enterprise) comboType.getSelectedItem();
+
+        String username = txtUsername.getText();
+        String password = String.valueOf(txtPasword.getPassword());
+        String name = txtAdmin.getText();
+
+        Employee employee = enterprise.getEmployeeDir().createEmployee(name);
+        if (Ecosystem.checkIfUsernameIsUnique(username)) {
+            UserCredentials credentials = null;
+            if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Comm) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new CommAdminRole());
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.CSO) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new CSOAdminRole());
+            
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Supplier) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new SupplierAdminRole());
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Cops) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new CopsAdminRole());
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new DocAdminRole());
+            }else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.FireFighter) {
+                credentials = enterprise.getUserCredentialsDir().createUserCredentials(username, password, employee, new FireFighterAdminRole());
+            }
+
+            populateTableEnterpriseAdmin();
+            txtUsername.setText("");
+            txtPasword.setText("");
+            txtAdmin.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please enter unique username", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblEnterprise.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select the row to delete the account", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
 
+            UserCredentials p = (UserCredentials) tblEnterprise.getValueAt(selectedRow, 2);
+
+            for (Network network : system.getNetworkList()) {
+                for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
+                    for (UserCredentials userAccount : enterprise.getUserCredentialsDir().getUserCredentialsList()) {
+                        if (p == userAccount) {
+                            enterprise.getUserCredentialsDir().getUserCredentialsList().remove(p);
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully deleted the account");
+            populateTableEnterpriseAdmin();
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void comboNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNetworkActionPerformed
         // TODO add your handling code here:
-        
+         Network network = (Network)comboNetwork.getSelectedItem();
+        if (network != null) {
+            populateComboBoxEnterprise(network);
+        }
     }//GEN-LAST:event_comboNetworkActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-      
+         panelWorkArea.remove(this);
+        Component[] componentArray = panelWorkArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        SysAdminWorkArea sysAdminwjp = (SysAdminWorkArea) component;
+        //sysAdminwjp.populateTree();
+        CardLayout layout = (CardLayout) panelWorkArea.getLayout();
+        layout.previous(panelWorkArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
