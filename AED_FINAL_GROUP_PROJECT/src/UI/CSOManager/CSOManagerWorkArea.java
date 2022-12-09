@@ -3,20 +3,105 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.CSOManager;
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.CSOTaskRequest;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskRequest;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
  * @author yashrevadekar
  */
 public class CSOManagerWorkArea extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    private Date d;
+    private SimpleDateFormat s;
     /**
      * Creates new form CSOManagerWorkArea
      */
-    public CSOManagerWorkArea() {
+    public CSOManagerWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        d = new Date();
+        s = new SimpleDateFormat("MM/dd/YY");
+        populateTableEvent();
+        populateTableWorkQueue();
     }
-
+     //populate  to assign CSO request
+    public void populateTableEvent()
+    {
+         DefaultTableModel model = (DefaultTableModel) tblNgoEvents.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+           if(work instanceof CSOTaskRequest){ 
+            Object[] row = new Object[10];
+            row[0] = work;
+            row[1] = ((CSOTaskRequest) work).getDescription();
+            row[2] =  work.getRequestDate();
+            row[3] = ((CSOTaskRequest) work).getLocation();
+            row[4] = ((CSOTaskRequest) work).getvRequired();
+            row[5] = ((CSOTaskRequest) work).getvAcquired();
+            
+            model.addRow(row);
+           }
+        }
+    }
+    //populate victim request to cso
+    public void populateTableWorkQueue(){
+         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){
+               if((work.getStatus().equalsIgnoreCase("Assigned To CSO"))||(work.getStatus().equalsIgnoreCase("CSO ASSIGNED the Request"))){
+                   
+               
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +133,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDesc = new javax.swing.JTextArea();
         txtTitle = new javax.swing.JTextField();
+        datechooser = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         btnRequest = new javax.swing.JButton();
         btnAnalysis = new javax.swing.JButton();
@@ -200,8 +286,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtVolunteers, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtVolunteers, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(482, 482, 482)
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -221,8 +308,10 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtVolunteers, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -339,23 +428,66 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
-      
+      int selectedRow = tblRequests.getSelectedRow();
+        
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } 
+         
+        else {
+            VictimTaskRequest cswr = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+
+            if(cswr.getStatus().equalsIgnoreCase("Assigned to CSO")){
+            cswr.setStatus("CSO Assigned the Request");
+            cswr.setReciever(credentials);
+
+            populateTableWorkQueue();
+            }
+            else{
+                 JOptionPane.showMessageDialog(null, "Invalid Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
-      
+      int selectedRow = tblRequests.getSelectedRow();
+        
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } 
+        else {
+
+            VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(p.getStatus().equalsIgnoreCase("CSO Assigned the Request")){
+                    p.setStatus("Complete");
+                    p.setReciever(credentials);
+                    JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+                    populateTableWorkQueue();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "INVALID Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void txtVolunteersKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVolunteersKeyTyped
         // TODO add your handling code here:
-      
+       char typedVol = evt.getKeyChar();
+        if(!Character.isDigit(typedVol)){
+            evt.consume();
+        }
+        //Restrict the length to 3 
+        if(txtVolunteers.getText().length() > 2){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtVolunteersKeyTyped
 
     private void txtLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLocationActionPerformed
@@ -363,16 +495,87 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
     }//GEN-LAST:event_txtLocationActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-       
+       try{
+        if(txtTitle.getText().isEmpty() || txtDesc.getText().isEmpty() || txtLocation.getText().isEmpty() || txtVolunteers.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill the Empty fields");
+        }else{
+
+        String event = txtTitle.getText();
+        String desp = txtDesc.getText();
+        String location = txtLocation.getText();
+        Date date = datechooser.getDate();
+        Date curDate = new Date();
+
+        Date d1 = null,d2 = null;
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+        String s3 = sdformat.format(date);
+        String s4 = sdformat.format(curDate);
+            try {
+                d1 = sdformat.parse(s3);
+                d2 = sdformat.parse(s4);
+            } catch (ParseException ex) {
+                Logger.getLogger(CSOManagerWorkArea.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        if(d1.compareTo(d2) < 0 ){
+            JOptionPane.showMessageDialog(null, "Days in past are not allowed");
+            return;
+
+        }
+        int req = Integer.parseInt(txtVolunteers.getText());
+        
+        if(event.equals("") || event.isEmpty() && desp.equals("") || desp.isEmpty() && location.equals("")|| location.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, " enter valid request");
+            return;
+        }
+        
+        CSOTaskRequest reqst = new CSOTaskRequest();
+        reqst.setTitle(event);
+        reqst.setDescription(desp);
+        reqst.setLocation(location);
+        reqst.setvRequired(req);
+        reqst.setRequestDate(date);
+
+        organization.gettaskQueue().getTaskRequestList().add(reqst);
+        credentials.getTaskQueue().getTaskRequestList().add(reqst);
+        system.gettaskQueue().getTaskRequestList().add(reqst);
+        populateTableEvent();
+        
+        txtTitle.setText("");
+        txtDesc.setText("");
+        txtLocation.setText("");
+        datechooser.setCalendar(null);
+        txtVolunteers.setText("");
+        }
+        }catch(NumberFormatException e){}
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
-       
+        SupplyRequest sr = new SupplyRequest(userProcessContainer,credentials,organization, enterprise,system);
+        userProcessContainer.add("ManageEmployee", sr);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestActionPerformed
 
     private void btnAnalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalysisActionPerformed
-       
+       DefaultCategoryDataset d = new DefaultCategoryDataset();
+
+        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+           if(work instanceof CSOTaskRequest)
+           {
+            
+               d.setValue(((CSOTaskRequest) work).getvAcquired(),"Event List",((CSOTaskRequest) work).getTitle());
+             
+        }
+        }
+           
+           JFreeChart chart = ChartFactory.createBarChart("Volunteers Acquired", "Event Name", "Volunteers Participated", d, PlotOrientation.VERTICAL, false, true, false);
+           CategoryPlot p = chart.getCategoryPlot();
+           p.setRangeGridlinePaint(Color.black);
+           ChartFrame f = new ChartFrame("Volunteer Analysis",chart);
+           f.setVisible(true);
+           f.setSize(500,400);
     }//GEN-LAST:event_btnAnalysisActionPerformed
 
 
@@ -382,6 +585,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnRequest;
+    private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
