@@ -24,7 +24,7 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     private Ecosystem system;
     private Enterprise enterprise;
     
-    public HospitalAdminWorkArea() {
+    public HospitalAdminWorkArea(JPanel userProcessContainer,Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
         this.enterprise=enterprise;
         this.userProcessContainer=userProcessContainer;
