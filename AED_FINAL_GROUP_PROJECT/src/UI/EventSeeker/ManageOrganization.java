@@ -5,17 +5,53 @@
  */
 package UI.EventSeeker;
 
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDir;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ghostdaddy16
  */
 public class ManageOrganization extends javax.swing.JPanel {
 
+    private OrganizationDir orgdirectory;
+    private JPanel userProcessContainer;
+
     /**
      * Creates new form ManageOrganization
      */
-    public ManageOrganization() {
+    public ManageOrganization(JPanel userProcessContainer, OrganizationDir orgdirectory) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.orgdirectory = orgdirectory;
+        populateTbl();
+        populateCmb();
+    }
+
+    private void populateTbl() {
+
+        DefaultTableModel model = (DefaultTableModel) tblOrg.getModel();
+
+        model.setRowCount(0);
+
+        for (Organization organization : orgdirectory.getOrganizationList()) {
+            Object[] row = new Object[3];
+            row[2] = organization.getOrganizationCode();
+            row[0] = organization.getOrgName();
+            row[1] = organization.getName();
+
+            model.addRow(row);
+        }
+    }
+    //populate event seeker organization in combo box
+
+    private void populateCmb() {
+        comboOrg.removeAllItems();
+        comboOrg.addItem(Organization.Type.Victim);
     }
 
     /**
@@ -139,7 +175,6 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBack.setText("image back");
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +224,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 701, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -207,7 +242,7 @@ public class ManageOrganization extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addGap(0, 701, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -218,17 +253,33 @@ public class ManageOrganization extends javax.swing.JPanel {
 
     private void btnAddOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrganizationActionPerformed
         // TODO add your handling code here:
-        
+        if (txtName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, " Empty fields !");
+        } else {
+            Organization.Type type = (Organization.Type) comboOrg.getSelectedItem();
+            orgdirectory.createOrganization(type, txtName.getText());
+            populateTbl();
+        }
     }//GEN-LAST:event_btnAddOrganizationActionPerformed
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
-        
+        char typedName = evt.getKeyChar();
+        if (!Character.isAlphabetic(typedName) && !Character.isWhitespace(typedName)) {
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if (txtName.getText().length() > 255) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-    
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
