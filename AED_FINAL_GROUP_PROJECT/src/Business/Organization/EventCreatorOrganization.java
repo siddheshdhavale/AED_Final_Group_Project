@@ -23,11 +23,11 @@ public class EventCreatorOrganization extends Organization{
         eventcreatorlist= new EventCreatorDir();
     }
 
-    public EventCreatorDir getEventcreatorlist() {
+    public EventCreatorDir getChangemakerlist() {
         return eventcreatorlist;
     }
 
-    public void setEventcreatorlist(EventCreatorDir eventcreatorlist) {
+    public void setChangemakerlist(EventCreatorDir eventcreatorlist) {
         this.eventcreatorlist = eventcreatorlist;
     }
 
