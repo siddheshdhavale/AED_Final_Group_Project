@@ -5,17 +5,70 @@
  */
 package UI.FireFighterWorkArea;
 
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.FireFighterOrganization;
+import Business.Organization.Organization;
+import Business.TaskQueue.TaskRequest;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.UserCredentials.UserCredentials;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ghostdaddy16
  */
 public class FireFighterWorkArea extends javax.swing.JPanel {
 
+    private JPanel userProcessContainer;
+    private UserCredentials credentials;
+    private Organization organization;
+    private Enterprise enterprise;
+    private Ecosystem system;
+    FireFighterOrganization firefighterOrganization;
     /**
      * Creates new form FireFighterWorkArea
      */
-    public FireFighterWorkArea() {
+    public FireFighterWorkArea(JPanel userProcessContainer,UserCredentials credentials,Organization organization,Enterprise enterprise,Ecosystem system) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.credentials=credentials;
+        this.organization=organization;
+        this.enterprise=enterprise;
+        this.system=system;
+        
+        populateFireFighterTable();
+    }
+    
+    //populate victim requets to fire man
+    
+    public void populateFireFighterTable(){
+
+         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        
+        model.setRowCount(0);
+        
+        
+        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+           if(work instanceof VictimTaskRequest){
+               if((work.getStatus().equalsIgnoreCase("Assigned To FireFighter"))||(work.getStatus().equalsIgnoreCase("FireFighter assigned the Request"))){
+                   
+               
+            Object[] row = new Object[10];
+            row[0] = work.getSender().getEmployee().getName();
+            row[1] = work.getSubject();
+            row[2] = ((VictimTaskRequest) work).getDescription();
+            row[3] = ((VictimTaskRequest) work).getLocation();
+            row[4] = work.getRequestDate();
+            row[5] = work;
+            row[6] = work.getReciever();
+            
+            model.addRow(row);
+           }
+        }
+        }
     }
 
     /**
@@ -131,11 +184,45 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
 
+        int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            VictimTaskRequest cswr = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(cswr.getStatus().equalsIgnoreCase("Assigned to FireFighter")){ 
+                cswr.setStatus("FireFighter assigned the Request");
+                cswr.setReciever(credentials);
+
+                populateFireFighterTable();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
 
+        int selectedRow = tblRequests.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            
+            VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
+            if(p.getStatus().equalsIgnoreCase("FireFighter assigned the Request")){ 
+            p.setStatus("Complete");
+            p.setReciever(credentials);
+            JOptionPane.showMessageDialog(null, "You have completed the request successfully");
+            populateFireFighterTable();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 
