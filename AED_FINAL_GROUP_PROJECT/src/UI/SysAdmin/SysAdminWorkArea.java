@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SysAdmin;
-
+import Business.Ecosystem;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +15,12 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form SysAdminWorkArea
      */
-    public SysAdminWorkArea() {
+    private Ecosystem system;
+    private JPanel panelWorkArea;
+    public SysAdminWorkArea(JPanel userProcessContainer,Ecosystem system) {
         initComponents();
+        this.panelWorkArea=userProcessContainer;
+        this.system=system;
     }
 
     /**
@@ -197,17 +203,26 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
 
     private void btnNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNetworkActionPerformed
         // TODO add your handling code here:
-       
+        ManageNetwork sysNew = new ManageNetwork(panelWorkArea,system);
+        panelWorkArea.add("ManageNetwork", sysNew);
+        CardLayout layout= (CardLayout) panelWorkArea.getLayout();
+        layout.next(panelWorkArea);
     }//GEN-LAST:event_btnNetworkActionPerformed
 
     private void btnEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseActionPerformed
         // TODO add your handling code here:
-        
+        ManageEnterprise sysEnt = new ManageEnterprise(panelWorkArea,system);
+        panelWorkArea.add("ManageEnterprise", sysEnt);
+        CardLayout layout= (CardLayout) panelWorkArea.getLayout();
+        layout.next(panelWorkArea);  
     }//GEN-LAST:event_btnEnterpriseActionPerformed
 
     private void btnEnterpriseAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseAdminActionPerformed
         // TODO add your handling code here:
-       
+       ManageEnterpriseAdmin sysEntAdmin = new ManageEnterpriseAdmin(panelWorkArea,system);
+        panelWorkArea.add("ManageEnterpriseAdmin", sysEntAdmin);
+        CardLayout layout= (CardLayout) panelWorkArea.getLayout();
+        layout.next(panelWorkArea);
     }//GEN-LAST:event_btnEnterpriseAdminActionPerformed
 
 

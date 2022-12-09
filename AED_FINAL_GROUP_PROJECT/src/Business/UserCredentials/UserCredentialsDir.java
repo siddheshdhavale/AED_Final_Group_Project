@@ -18,7 +18,7 @@ public class UserCredentialsDir {
         
     }
 
-    public ArrayList<UserCredentials> getUserAccountList() {
+    public ArrayList<UserCredentials> getUserCredentialsList() {
         return UserCredentialsList;
     }
     //aunthenticate a user

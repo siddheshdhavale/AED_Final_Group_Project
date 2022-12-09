@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SysAdmin;
-
+import Business.Ecosystem;
+import Business.Network.Network;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +19,25 @@ public class ManageNetwork extends javax.swing.JPanel {
     /**
      * Creates new form ManageNetwork
      */
-    public ManageNetwork() {
+     private JPanel panelWorkArea;
+    private Ecosystem system;
+    
+    public ManageNetwork(JPanel userProcessContainer,Ecosystem system) {
         initComponents();
+         this.panelWorkArea=userProcessContainer;
+        this.system=system;
+        populateTableNetwork();
+    }
+    //populate network table
+    public void populateTableNetwork(){
+        DefaultTableModel model = (DefaultTableModel) tblNetwork.getModel();
+
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            Object[] row = new Object[1];
+            row[0] = network;
+            model.addRow(row);
+        }
     }
 
     /**
@@ -187,17 +210,46 @@ public class ManageNetwork extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
+         String name = txtName.getText();
+
+        Network network = system.addNetwork();
+        network.setName(name);
+
+        populateTableNetwork();
+        txtName.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow= tblNetwork.getSelectedRow();
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null, "Select the row to delete the account", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+
+            Network p=(Network) tblNetwork.getValueAt(selectedRow, 0);
+
+            for (Network network : system.getNetworkList()) {
+                    if(p==network){
+                      system.getNetworkList().remove(p);
+                        break;
+                    }
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully deleted the account");
+            populateTableNetwork();
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
         // TODO add your handling code here:
-       
+        panelWorkArea.remove(this);
+        Component[] componentArray = panelWorkArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        SysAdminWorkArea sysAdminwjp = (SysAdminWorkArea) component;
+        //sysAdminwjp.populateTree();
+        CardLayout layout = (CardLayout) panelWorkArea.getLayout();
+        layout.previous(panelWorkArea);
     }//GEN-LAST:event_btnBack1ActionPerformed
 
 

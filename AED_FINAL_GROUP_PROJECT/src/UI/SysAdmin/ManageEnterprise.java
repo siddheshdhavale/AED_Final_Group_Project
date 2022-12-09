@@ -3,7 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UI.SysAdmin;
-
+import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
@@ -13,8 +20,43 @@ public class ManageEnterprise extends javax.swing.JPanel {
     /**
      * Creates new form ManageEnterprise
      */
-    public ManageEnterprise() {
+    private JPanel panelWorkArea;
+    private Ecosystem system;
+    public ManageEnterprise(JPanel userProcessContainer,Ecosystem system) {
         initComponents();
+         this.panelWorkArea=userProcessContainer;
+        this.system=system;
+        populateTableEnterprise();
+        populateCombo();
+    }
+    //populate network and enterprise combo box
+    private void populateCombo() {
+        comboNetwork.removeAllItems();
+        comboType.removeAllItems();
+
+        for (Network network : system.getNetworkList()) {
+            comboNetwork.addItem(network);
+        }
+
+        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
+            comboType.addItem(type);
+        }
+
+    }
+    //populate enterprise table
+    private void populateTableEnterprise() {
+        DefaultTableModel model = (DefaultTableModel) tblEnterprise.getModel();
+
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
+                Object[] row = new Object[3];
+                row[0] = enterprise;
+                row[1] = network.getName();
+                row[2] = enterprise.getEnterpriseType().getValue();
+                model.addRow(row);
+            }
+        }
     }
 
     /**
@@ -216,17 +258,58 @@ public class ManageEnterprise extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
+         Network network = (Network) comboNetwork.getSelectedItem();
+        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) comboType.getSelectedItem();
+
+        if (network == null || type == null) {
+            JOptionPane.showMessageDialog(null, "Invalid !");
+            return;
+        }
+
+        String name = txtName.getText();
+
+        Enterprise enterprise = network.getEnterpriseDir().createAndAddEnterprise(name, type);
+
+        populateTableEnterprise();
+        txtName.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-       
+       int selectedRow= tblEnterprise.getSelectedRow();
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null, "Select the row to delete the account", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+
+            Enterprise p=(Enterprise) tblEnterprise.getValueAt(selectedRow, 0);
+
+            for (Network network : system.getNetworkList()) {
+                for (Enterprise enterprise : network.getEnterpriseDir().getEnterpriseList()) {
+                   
+                        if(p==enterprise){
+                           network.getEnterpriseDir().getEnterpriseList().remove(p);
+                            break;
+                        }
+
+                    
+                }
+            }
+
+            JOptionPane.showMessageDialog(null, "Successfully deleted the account");
+            populateTableEnterprise();
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-       
+         panelWorkArea.remove(this);
+        Component[] componentArray = panelWorkArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        SysAdminWorkArea sysAdminwjp = (SysAdminWorkArea) component;
+        //sysAdminwjp.populateTree();
+        CardLayout layout = (CardLayout) panelWorkArea.getLayout();
+        layout.previous(panelWorkArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
 
