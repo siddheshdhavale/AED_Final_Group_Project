@@ -4,17 +4,65 @@
  */
 package UI.CopsEnterprise;
 
+import Business.Employee.Employee;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDir;
+import Business.Organization.CopsOrganization;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author yashrevadekar
  */
+
+
 public class ManageEmployee extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageEmployee
      */
-    public ManageEmployee() {
+    private OrganizationDir orgdirectory;
+    private JPanel userProcessContainer;
+    public ManageEmployee(JPanel userProcessContainer,OrganizationDir orgdirectory) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.orgdirectory=orgdirectory;
+        populateComboOrganization();
+        populateComboOrganizationEmp();
+    }
+    //populate police employee table by adding employees
+    private void populateTbl(Organization organization){
+        DefaultTableModel model = (DefaultTableModel) tblEmp.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Employee employee : organization.getEmployeeDir().getEmployeeList()){
+            Object[] row = new Object[5];
+            row[0] = employee;
+            row[2] = employee.getId();
+            row[1] = organization.getName();
+            model.addRow(row);
+        }
+    }
+    //populate organization combo box
+    public void populateComboOrganization(){
+        comboOrg.removeAllItems();
+        
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            if((organization instanceof CopsOrganization))
+            comboOrg.addItem(organization);
+        }
+    }
+    //populate employee - police organization combo box
+    public void populateComboOrganizationEmp(){
+        comboOrgSelect.removeAllItems();
+
+        for (Organization organization : orgdirectory.getOrganizationList()){
+            if((organization instanceof CopsOrganization))
+            comboOrgSelect.addItem(organization);
+        }
     }
 
     /**
@@ -218,23 +266,46 @@ public class ManageEmployee extends javax.swing.JPanel {
 
     private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
         // TODO add your handling code here:
-      
+       if(txtName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill the Empty fields");
+        }else{
+        
+        Organization organization =(Organization)comboOrgSelect.getSelectedItem();
+        String name = txtName.getText();
+        
+        organization.getEmployeeDir().createEmployee(name);
+        populateTbl(organization);
+        
+        txtName.setText("");
+      }
         
     }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
     private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
         // TODO add your handling code here:
-      
+      char typedName = evt.getKeyChar();
+        if(!Character.isAlphabetic(typedName) && !Character.isWhitespace(typedName)){
+            evt.consume();
+        }
+        //Restrict the length to 256 
+        if(txtName.getText().length() > 255){
+                evt.consume();
+        }
     }//GEN-LAST:event_txtNameKeyTyped
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-       
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
         // TODO add your handling code here:
-       
+        Organization organization = (Organization) comboOrg.getSelectedItem();
+        if (organization != null){
+            populateTbl(organization);
+        }
     }//GEN-LAST:event_comboOrgActionPerformed
 
 
