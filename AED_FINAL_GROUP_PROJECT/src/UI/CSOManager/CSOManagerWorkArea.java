@@ -62,7 +62,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : organization.getTaskQueue().getTaskRequestList()){
            if(work instanceof CSOTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = work;
@@ -83,9 +83,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){
-               if((work.getStatus().equalsIgnoreCase("Assigned To CSO"))||(work.getStatus().equalsIgnoreCase("CSO ASSIGNED the Request"))){
+               if((work.getStatus().equalsIgnoreCase("Assigned To CSO"))||(work.getStatus().equalsIgnoreCase("CSO Assigned the Request"))){
                    
                
             Object[] row = new Object[10];
@@ -536,9 +536,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         reqst.setvRequired(req);
         reqst.setRequestDate(date);
 
-        organization.gettaskQueue().getTaskRequestList().add(reqst);
+        organization.getTaskQueue().getTaskRequestList().add(reqst);
         credentials.getTaskQueue().getTaskRequestList().add(reqst);
-        system.gettaskQueue().getTaskRequestList().add(reqst);
+        system.getTaskQueue().getTaskRequestList().add(reqst);
         populateTableEvent();
         
         txtTitle.setText("");
@@ -561,7 +561,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
     private void btnAnalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalysisActionPerformed
        DefaultCategoryDataset d = new DefaultCategoryDataset();
 
-        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : organization.getTaskQueue().getTaskRequestList()){
            if(work instanceof CSOTaskRequest)
            {
             

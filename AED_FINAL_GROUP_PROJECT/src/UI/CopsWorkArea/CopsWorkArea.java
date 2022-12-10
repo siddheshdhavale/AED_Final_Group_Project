@@ -48,7 +48,7 @@ public class CopsWorkArea extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){
                if((work.getStatus().equalsIgnoreCase("Assigned To Cops"))||(work.getStatus().equalsIgnoreCase("Cops assigned the Request"))){
                    
@@ -201,8 +201,8 @@ public class CopsWorkArea extends javax.swing.JPanel {
         } else {
 
             VictimTaskRequest cswr = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
-            if(cswr.getStatus().equalsIgnoreCase("Assigned To Police")){ 
-            cswr.setStatus("Police assigned the Request");
+            if(cswr.getStatus().equalsIgnoreCase("Assigned To Cops")){ 
+            cswr.setStatus("Cops assigned the Request");
             cswr.setReciever(credentials);
 
             populateCopsTable();
@@ -221,7 +221,7 @@ public class CopsWorkArea extends javax.swing.JPanel {
         } else {
 
             VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
-             if(p.getStatus().equalsIgnoreCase("Police assigned the Request")){ 
+             if(p.getStatus().equalsIgnoreCase("Cops assigned the Request")){ 
             p.setStatus("Complete");
             p.setReciever(credentials);
             JOptionPane.showMessageDialog(null, "You have completed the request successfully");

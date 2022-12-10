@@ -68,7 +68,7 @@ public class DashboardVolunteer extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof CSOTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = work;

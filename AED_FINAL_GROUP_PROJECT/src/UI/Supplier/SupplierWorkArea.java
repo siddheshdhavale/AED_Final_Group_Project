@@ -63,7 +63,7 @@ public class SupplierWorkArea extends javax.swing.JPanel {
 
         model.setRowCount(0);
 
-        for (TaskRequest task : system.gettaskQueue().getTaskRequestList()) {
+        for (TaskRequest task : system.getTaskQueue().getTaskRequestList()) {
             if (task instanceof SupplierTaskRequest) {
                 Object[] row = new Object[10];
                 row[0] = ((SupplierTaskRequest) task).getRtype();

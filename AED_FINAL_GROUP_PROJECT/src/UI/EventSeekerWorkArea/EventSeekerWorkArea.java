@@ -52,7 +52,7 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : organization.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = work.getSender().getEmployee().getName();
@@ -288,9 +288,9 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
         req.setStatus("Requested");
         req.setSender(credentials);
         req.setRequestDate(d);
-        organization.gettaskQueue().getTaskRequestList().add(req);
+        organization.getTaskQueue().getTaskRequestList().add(req);
         credentials.getTaskQueue().getTaskRequestList().add(req);
-        system.gettaskQueue().getTaskRequestList().add(req);
+        system.getTaskQueue().getTaskRequestList().add(req);
         
         populateTableWorkQueue();
         

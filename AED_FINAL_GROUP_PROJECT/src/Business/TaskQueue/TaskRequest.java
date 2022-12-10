@@ -4,24 +4,26 @@
  */
 package Business.TaskQueue;
 
+
 import Business.CSO.CSO;
-import Business.Cops.Cops;
 import Business.EventCreator.EventCreator;
+
 import Business.FireFighter.FireFighter;
+import Business.Cops.Cops;
+import Business.Supplier.Item;
+import Business.Supplier.Supplier;
 import Business.UserCredentials.UserCredentials;
 import Business.Victim.Victim;
 import Business.Volunteer.Volunteer;
 import java.util.Date;
-import Business.Supplier.Item;
-import Business.Supplier.Supplier;
 
 /**
  *
  * @author siddh
  */
-public class TaskRequest {
+public abstract class TaskRequest {
     
-    private String subject;
+private String subject;
     private UserCredentials sender;
     private UserCredentials reciever;
     private String status;
@@ -147,7 +149,13 @@ public class TaskRequest {
     public void setFirefighter(FireFighter firefighter) {
         this.firefighter = firefighter;
     }
+
+  
     
+    @Override
+    public String toString(){
+        return status;
+    }
    
     
 }
