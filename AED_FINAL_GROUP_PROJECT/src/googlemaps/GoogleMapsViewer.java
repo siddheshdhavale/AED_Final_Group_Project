@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.googlemaps;
+package googlemaps;
 
+/**
+ *
+ * @author ghostdaddy16
+ */
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
@@ -16,10 +20,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-/**
- *
- * @author ghostdaddy16
- */
+
+
 public class GoogleMapsViewer extends JFXPanel {
 
     private final ArrayList<Marker> markers = new ArrayList<>();
