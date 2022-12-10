@@ -12,7 +12,7 @@ import Business.Organization.Organization;
 import Business.UserCredentials.UserCredentials;
 import Business.TaskQueue.VictimTaskRequest;
 import Business.TaskQueue.TaskRequest;
-import Business.googlemaps.GoogleMapsViewer;
+import googlemaps.GoogleMapsViewer;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
