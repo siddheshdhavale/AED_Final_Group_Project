@@ -55,7 +55,7 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = work.getSender().getEmployee().getName();
@@ -450,16 +450,16 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblEvent.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Cops", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
-            if(cswr.getStatus().equals("Assigned to the Police")){
-                JOptionPane.showMessageDialog(null, "This request is already assigned to Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            if(cswr.getStatus().equals("Assigned to Cops")){
+                JOptionPane.showMessageDialog(null, "This request is already assigned to Cops", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             else{
                if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
-            JOptionPane.showMessageDialog(null, "Assigned to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
-            cswr.setStatus("Assigned To Police");
+            JOptionPane.showMessageDialog(null, "Assigned to the Cops", "Warning", JOptionPane.WARNING_MESSAGE);
+            cswr.setStatus("Assigned To Cops");
             populateTableTaskQueue();
             }
                else{
@@ -504,14 +504,14 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
-            if(cswr.getStatus().equals("Assigned to the FireMan")){
+            if(cswr.getStatus().equals("Assigned to the FireFighter")){
                 JOptionPane.showMessageDialog(null, "This request is already assigned to FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             else{
                 if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
                    
                 JOptionPane.showMessageDialog(null, "Assigned to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
-                cswr.setStatus("Assigned To FireMan");
+                cswr.setStatus("Assigned To FireFighter");
                 populateTableTaskQueue();
             }
                 else{
@@ -525,13 +525,13 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
        int selectedRow = tblEvent.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the NGO", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the CSO", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             
 
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
             if(cswr.getStatus().equalsIgnoreCase("Requested")){
-            cswr.setStatus("Assigned To NGO");
+            cswr.setStatus("Assigned To CSO");
             populateTableTaskQueue();
             }
             else{

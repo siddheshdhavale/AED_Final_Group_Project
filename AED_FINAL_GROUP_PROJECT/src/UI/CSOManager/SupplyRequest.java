@@ -52,7 +52,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         model.setRowCount(0);
         
        
-        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : organization.getTaskQueue().getTaskRequestList()){
            if(work instanceof SupplierTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = ((SupplierTaskRequest) work).getRtype();
@@ -329,9 +329,9 @@ public class SupplyRequest extends javax.swing.JPanel {
         rqst.setQuantity(quantity);
         rqst.setStatus("Requested");
         rqst.setSender(credentials);
-        organization.gettaskQueue().getTaskRequestList().add(rqst);
+        organization.getTaskQueue().getTaskRequestList().add(rqst);
         credentials.getTaskQueue().getTaskRequestList().add(rqst);
-        system.gettaskQueue().getTaskRequestList().add(rqst);
+        system.getTaskQueue().getTaskRequestList().add(rqst);
      
         
         populateTableCSOWorkQueue();
@@ -352,7 +352,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         int c=0;
         int m=0;
         int n=0;
-        for (TaskRequest work : organization.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : organization.getTaskQueue().getTaskRequestList()){
            if(work instanceof SupplierTaskRequest)
            {
               

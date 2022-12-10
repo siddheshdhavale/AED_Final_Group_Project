@@ -45,7 +45,7 @@ public class DoctorWorkArea extends javax.swing.JPanel {
         model.setRowCount(0);
         
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){
                if((work.getStatus().equalsIgnoreCase("Assigned To Doctor"))||(work.getStatus().equalsIgnoreCase("Doctor assigned the Request"))){
                    
