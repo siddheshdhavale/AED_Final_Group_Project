@@ -89,6 +89,10 @@ public class ManageEmployee extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         comboOrg = new javax.swing.JComboBox();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -126,10 +130,12 @@ public class ManageEmployee extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEmp);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 28), new java.awt.Color(153, 0, 153))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 28))); // NOI18N
         jPanel4.setOpaque(false);
 
+        btnAddEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnAddEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAddEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnAddEmployee.setText("Add Employee");
         btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,6 +196,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnBack.setText("back");
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {

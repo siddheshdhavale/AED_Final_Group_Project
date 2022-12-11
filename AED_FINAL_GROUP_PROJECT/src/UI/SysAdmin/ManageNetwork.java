@@ -61,7 +61,12 @@ public class ManageNetwork extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         btnBack1 = new javax.swing.JButton();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Network");
 
@@ -100,7 +105,9 @@ public class ManageNetwork extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
         jPanel4.setOpaque(false);
 
+        btnAdd.setBackground(new java.awt.Color(208, 61, 86));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add Network");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +115,9 @@ public class ManageNetwork extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(208, 61, 86));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete Network");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

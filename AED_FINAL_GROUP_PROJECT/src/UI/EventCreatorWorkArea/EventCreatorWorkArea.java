@@ -55,7 +55,7 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
            if(work instanceof VictimTaskRequest){ 
             Object[] row = new Object[10];
             row[0] = work.getSender().getEmployee().getName();
@@ -102,9 +102,14 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         btnFire = new javax.swing.JButton();
         btnCSO = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Event Maker Work Area");
+        jLabel1.setText("Event Creator Work Area");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,7 +148,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblEvent);
 
+        btnView.setBackground(new java.awt.Color(208, 61, 86));
         btnView.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 255, 255));
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +158,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnAssignTo.setBackground(new java.awt.Color(208, 61, 86));
         btnAssignTo.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        btnAssignTo.setForeground(new java.awt.Color(255, 255, 255));
         btnAssignTo.setText("Acknowledge");
         btnAssignTo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +168,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnComplete.setBackground(new java.awt.Color(208, 61, 86));
         btnComplete.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        btnComplete.setForeground(new java.awt.Color(255, 255, 255));
         btnComplete.setText("Complete");
         btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +253,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Emergency Services", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel5.setOpaque(false);
 
+        btnCops.setBackground(new java.awt.Color(208, 61, 86));
         btnCops.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCops.setForeground(new java.awt.Color(255, 255, 255));
         btnCops.setText("Cops Department");
         btnCops.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +263,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnHealth.setBackground(new java.awt.Color(208, 61, 86));
         btnHealth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnHealth.setForeground(new java.awt.Color(255, 255, 255));
         btnHealth.setText("Health Department");
         btnHealth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +273,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnFire.setBackground(new java.awt.Color(208, 61, 86));
         btnFire.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFire.setForeground(new java.awt.Color(255, 255, 255));
         btnFire.setText("Fire Department");
         btnFire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,7 +307,9 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        btnCSO.setBackground(new java.awt.Color(208, 61, 86));
         btnCSO.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnCSO.setForeground(new java.awt.Color(255, 255, 255));
         btnCSO.setText("CSO");
         btnCSO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -450,16 +469,16 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblEvent.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the Cops", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
-            if(cswr.getStatus().equals("Assigned to the Police")){
-                JOptionPane.showMessageDialog(null, "This request is already assigned to Cop", "Warning", JOptionPane.WARNING_MESSAGE);
+            if(cswr.getStatus().equals("Assigned to Cops")){
+                JOptionPane.showMessageDialog(null, "This request is already assigned to Cops", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             else{
                if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
-            JOptionPane.showMessageDialog(null, "Assigned to the Cop", "Warning", JOptionPane.WARNING_MESSAGE);
-            cswr.setStatus("Assigned To Police");
+            JOptionPane.showMessageDialog(null, "Assigned to the Cops", "Warning", JOptionPane.WARNING_MESSAGE);
+            cswr.setStatus("Assigned To Cops");
             populateTableTaskQueue();
             }
                else{
@@ -504,14 +523,14 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
-            if(cswr.getStatus().equals("Assigned to the FireMan")){
+            if(cswr.getStatus().equals("Assigned to the FireFighter")){
                 JOptionPane.showMessageDialog(null, "This request is already assigned to FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
             }
             else{
                 if(cswr.getStatus().equalsIgnoreCase("Requested")){ 
                    
                 JOptionPane.showMessageDialog(null, "Assigned to the FireFighter", "Warning", JOptionPane.WARNING_MESSAGE);
-                cswr.setStatus("Assigned To FireMan");
+                cswr.setStatus("Assigned To FireFighter");
                 populateTableTaskQueue();
             }
                 else{
@@ -525,13 +544,13 @@ public class EventCreatorWorkArea extends javax.swing.JPanel {
         // TODO add your handling code here:
        int selectedRow = tblEvent.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the NGO", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please choose the row to forward request to the CSO", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             
 
             VictimTaskRequest cswr = (VictimTaskRequest) tblEvent.getValueAt(selectedRow, 5);
             if(cswr.getStatus().equalsIgnoreCase("Requested")){
-            cswr.setStatus("Assigned To NGO");
+            cswr.setStatus("Assigned To CSO");
             populateTableTaskQueue();
             }
             else{

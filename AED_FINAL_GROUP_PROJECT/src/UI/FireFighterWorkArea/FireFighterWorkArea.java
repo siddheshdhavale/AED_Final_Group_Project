@@ -5,13 +5,14 @@
  */
 package UI.FireFighterWorkArea;
 
+
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.FireFighterOrganization;
 import Business.Organization.Organization;
-import Business.TaskQueue.TaskRequest;
-import Business.TaskQueue.VictimTaskRequest;
 import Business.UserCredentials.UserCredentials;
+import Business.TaskQueue.VictimTaskRequest;
+import Business.TaskQueue.TaskRequest;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FireFighterWorkArea extends javax.swing.JPanel {
 
-    private JPanel userProcessContainer;
+   private JPanel userProcessContainer;
     private UserCredentials credentials;
     private Organization organization;
     private Enterprise enterprise;
@@ -46,19 +47,26 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
     
     public void populateFireFighterTable(){
 
-         DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+           DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
         
         model.setRowCount(0);
         
         
-        for (TaskRequest work : system.gettaskQueue().getTaskRequestList()){
+        for (TaskRequest work : system.getTaskQueue().getTaskRequestList()){
+                  
            if(work instanceof VictimTaskRequest){
+                             
                if((work.getStatus().equalsIgnoreCase("Assigned To FireFighter"))||(work.getStatus().equalsIgnoreCase("FireFighter assigned the Request"))){
+                   
+                   //test
                    
                
             Object[] row = new Object[10];
+            
             row[0] = work.getSender().getEmployee().getName();
+         
             row[1] = work.getSubject();
+         
             row[2] = ((VictimTaskRequest) work).getDescription();
             row[3] = ((VictimTaskRequest) work).getLocation();
             row[4] = work.getRequestDate();
@@ -88,8 +96,13 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRequests = new javax.swing.JTable();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FireMan Work Area");
+        jLabel1.setText("FireFighter Work Area");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -105,7 +118,9 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnAssign.setBackground(new java.awt.Color(208, 61, 86));
         btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
         btnAssign.setText("Acknowledge");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +128,9 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnComplete.setBackground(new java.awt.Color(208, 61, 86));
         btnComplete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnComplete.setForeground(new java.awt.Color(255, 255, 255));
         btnComplete.setText("Responded");
         btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +201,7 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
 
-        int selectedRow = tblRequests.getSelectedRow();
+       int selectedRow = tblRequests.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -206,7 +223,7 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
 
-        int selectedRow = tblRequests.getSelectedRow();
+       int selectedRow = tblRequests.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "To allocate the account, please choose the row", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -222,7 +239,7 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Wrong Request", "Warning", JOptionPane.WARNING_MESSAGE);
             }
 
-        }
+        }  
     }//GEN-LAST:event_btnCompleteActionPerformed
 
 

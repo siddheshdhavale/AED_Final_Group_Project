@@ -105,7 +105,7 @@ public abstract class Organization {
         return organizationCode;
     }
 
-    public TaskQueue gettaskQueue() {
+    public TaskQueue getTaskQueue() {
         return taskQueue;
     }
 

@@ -53,10 +53,14 @@ public class FireFighterAdminWorkArea extends javax.swing.JPanel {
         btnManageOrganization = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
         jPanel3.setToolTipText("");
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FireMan Enterprise");
+        jLabel1.setText("FireFighter Enterprise");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -79,7 +83,9 @@ public class FireFighterAdminWorkArea extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 36))); // NOI18N
         jPanel4.setOpaque(false);
 
+        btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnManageEmployee.setText(" Employee");
         btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +93,9 @@ public class FireFighterAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageUserAccount.setBackground(new java.awt.Color(208, 61, 86));
         btnManageUserAccount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageUserAccount.setForeground(new java.awt.Color(255, 255, 255));
         btnManageUserAccount.setText(" User Credentials");
         btnManageUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +103,9 @@ public class FireFighterAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageOrganization.setBackground(new java.awt.Color(208, 61, 86));
         btnManageOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageOrganization.setForeground(new java.awt.Color(255, 255, 255));
         btnManageOrganization.setText("Organization");
         btnManageOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

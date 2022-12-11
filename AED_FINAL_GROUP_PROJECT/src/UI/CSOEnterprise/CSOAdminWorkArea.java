@@ -48,9 +48,14 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
         btnManageOrganization = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NGO Enterprise");
+        jLabel1.setText("CSO Enterprise");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -66,14 +71,16 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Welcome, You're logged in as NGO Admin");
+        jLabel2.setText("Welcome, You're logged in as CSO Admin");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel3.setOpaque(false);
 
         jLabel3.setText("emp");
 
+        btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnManageEmployee.setText(" Employee");
         btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +88,9 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageUserCredentials.setBackground(new java.awt.Color(208, 61, 86));
         btnManageUserCredentials.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageUserCredentials.setForeground(new java.awt.Color(255, 255, 255));
         btnManageUserCredentials.setText(" User Credentials");
         btnManageUserCredentials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +100,9 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
 
         jLabel4.setText("us");
 
+        btnManageOrganization.setBackground(new java.awt.Color(208, 61, 86));
         btnManageOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageOrganization.setForeground(new java.awt.Color(255, 255, 255));
         btnManageOrganization.setText("Organization");
         btnManageOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
