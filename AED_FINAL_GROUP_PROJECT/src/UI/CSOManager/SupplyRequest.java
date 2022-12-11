@@ -91,6 +91,8 @@ public class SupplyRequest extends javax.swing.JPanel {
         btnBarChart = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
         jPanel2.setBackground(new java.awt.Color(208, 61, 86));
         jPanel2.setEnabled(false);
 
@@ -217,7 +219,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         );
 
         btnBarChart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnBarChart.setText("barchart");
+        btnBarChart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/analysis.png"))); // NOI18N
         btnBarChart.setBorderPainted(false);
         btnBarChart.setContentAreaFilled(false);
         btnBarChart.addActionListener(new java.awt.event.ActionListener() {
@@ -227,8 +229,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         });
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\siddh\\Downloads\\back.png")); // NOI18N
-        btnBack.setText("back");
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/back_f.jpg"))); // NOI18N
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {

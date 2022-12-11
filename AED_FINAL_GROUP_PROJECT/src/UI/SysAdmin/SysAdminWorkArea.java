@@ -73,7 +73,7 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel4.setOpaque(false);
 
-        jLabel3.setText("net");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/network.png"))); // NOI18N
 
         btnNetwork.setBackground(new java.awt.Color(208, 61, 86));
         btnNetwork.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -95,7 +95,7 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("ent");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/enterprise.png"))); // NOI18N
 
         btnEnterpriseAdmin.setBackground(new java.awt.Color(208, 61, 86));
         btnEnterpriseAdmin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -107,14 +107,14 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("ent ad");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Admin.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)

@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1949" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1955" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
           </Group>
@@ -177,7 +177,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\siddh\Downloads\employee.png"/>
+                  <Image iconType="3" name="/UI/CSOEnterprise/12e23e5b-30f6-45f8-9a64-253c98c790ba.jpg"/>
                 </Property>
               </Properties>
             </Component>
@@ -218,7 +218,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\siddh\Downloads\id-card.png"/>
+                  <Image iconType="3" name="/UI/id-card.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -242,7 +242,7 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\siddh\Downloads\non-profit-organization.png"/>
+                  <Image iconType="3" name="/UI/organization.jpg"/>
                 </Property>
               </Properties>
             </Component>

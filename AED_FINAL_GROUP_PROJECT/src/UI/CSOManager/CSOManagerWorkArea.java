@@ -359,7 +359,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         );
 
         btnAnalysis.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnAnalysis.setText("Volunteers");
+        btnAnalysis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/analysis.png"))); // NOI18N
         btnAnalysis.setBorderPainted(false);
         btnAnalysis.setContentAreaFilled(false);
         btnAnalysis.addActionListener(new java.awt.event.ActionListener() {

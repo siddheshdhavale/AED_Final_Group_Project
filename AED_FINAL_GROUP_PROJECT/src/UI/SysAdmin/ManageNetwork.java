@@ -161,7 +161,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         );
 
         btnBack1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBack1.setText("back");
+        btnBack1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/back_f.jpg"))); // NOI18N
         btnBack1.setBorderPainted(false);
         btnBack1.setContentAreaFilled(false);
         btnBack1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 451, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
