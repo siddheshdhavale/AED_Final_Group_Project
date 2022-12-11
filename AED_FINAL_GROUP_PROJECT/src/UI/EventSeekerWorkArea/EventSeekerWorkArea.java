@@ -93,7 +93,12 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
         btnPost = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Event Seeker Work Area");
 
@@ -150,7 +155,9 @@ public class EventSeekerWorkArea extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         jLabel3.setText("Description");
 
+        btnPost.setBackground(new java.awt.Color(208, 61, 86));
         btnPost.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPost.setForeground(new java.awt.Color(255, 255, 255));
         btnPost.setText("Request Help");
         btnPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

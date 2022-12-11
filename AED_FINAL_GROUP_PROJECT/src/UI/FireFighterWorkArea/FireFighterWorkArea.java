@@ -96,8 +96,13 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRequests = new javax.swing.JTable();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("FireMan Work Area");
+        jLabel1.setText("FireFighter Work Area");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,7 +118,9 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnAssign.setBackground(new java.awt.Color(208, 61, 86));
         btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
         btnAssign.setText("Acknowledge");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +128,9 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnComplete.setBackground(new java.awt.Color(208, 61, 86));
         btnComplete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnComplete.setForeground(new java.awt.Color(255, 255, 255));
         btnComplete.setText("Responded");
         btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

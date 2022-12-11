@@ -49,9 +49,13 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
         btnManageOrganization = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
         jPanel2.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cops Enterprise");
 
@@ -78,7 +82,9 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
 
         jLabel3.setText("emp");
 
+        btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnManageEmployee.setText(" Employee");
         btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +92,9 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageUserCredentials.setBackground(new java.awt.Color(208, 61, 86));
         btnManageUserCredentials.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageUserCredentials.setForeground(new java.awt.Color(255, 255, 255));
         btnManageUserCredentials.setText(" User Credentials");
         btnManageUserCredentials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +104,9 @@ public class CopsAdminWorkArea extends javax.swing.JPanel {
 
         jLabel4.setText("user");
 
+        btnManageOrganization.setBackground(new java.awt.Color(208, 61, 86));
         btnManageOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageOrganization.setForeground(new java.awt.Color(255, 255, 255));
         btnManageOrganization.setText("Organization");
         btnManageOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

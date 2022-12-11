@@ -52,8 +52,12 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
         btnManageOrganization = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
         jPanel2.setToolTipText("");
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Hospital Enterprise");
 
@@ -78,7 +82,9 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 36))); // NOI18N
         jPanel3.setOpaque(false);
 
+        btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageEmployee.setForeground(new java.awt.Color(255, 255, 255));
         btnManageEmployee.setText(" Employee");
         btnManageEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +92,9 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageUserCredentials.setBackground(new java.awt.Color(208, 61, 86));
         btnManageUserCredentials.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageUserCredentials.setForeground(new java.awt.Color(255, 255, 255));
         btnManageUserCredentials.setText(" User Account");
         btnManageUserCredentials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +102,9 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnManageOrganization.setBackground(new java.awt.Color(208, 61, 86));
         btnManageOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnManageOrganization.setForeground(new java.awt.Color(255, 255, 255));
         btnManageOrganization.setText("Organization");
         btnManageOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
