@@ -229,7 +229,7 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
         } else {
             
             VictimTaskRequest p = (VictimTaskRequest) tblRequests.getValueAt(selectedRow, 5);
-            if(p.getStatus().equalsIgnoreCase("FireMan assigned the Request")){ 
+            if(p.getStatus().equalsIgnoreCase("FireFighter assigned the Request")){ 
             p.setStatus("Complete");
             p.setReciever(credentials);
             JOptionPane.showMessageDialog(null, "You have completed the request successfully");
