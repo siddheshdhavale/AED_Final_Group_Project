@@ -133,16 +133,17 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDesc = new javax.swing.JTextArea();
         txtTitle = new javax.swing.JTextField();
-        datechooser = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         btnRequest = new javax.swing.JButton();
         btnAnalysis = new javax.swing.JButton();
 
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
         jPanel2.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NGO Manager Work Area");
+        jLabel1.setText("CSO Manager Work Area");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -178,7 +179,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblNgoEvents);
 
+        btnAssign.setBackground(new java.awt.Color(208, 61, 86));
         btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnAssign.setForeground(new java.awt.Color(255, 255, 255));
         btnAssign.setText("Acknowledge");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +189,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnComplete.setBackground(new java.awt.Color(208, 61, 86));
         btnComplete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnComplete.setForeground(new java.awt.Color(255, 255, 255));
         btnComplete.setText("Completed");
         btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,7 +251,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel3.setText("Event Title");
 
+        btnCreate.setBackground(new java.awt.Color(208, 61, 86));
         btnCreate.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        btnCreate.setForeground(new java.awt.Color(255, 255, 255));
         btnCreate.setText("Create Event");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,8 +294,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtVolunteers, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(482, 482, 482)
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -308,9 +314,7 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                            .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,7 +331,9 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Request", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel4.setOpaque(false);
 
+        btnRequest.setBackground(new java.awt.Color(208, 61, 86));
         btnRequest.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRequest.setForeground(new java.awt.Color(255, 255, 255));
         btnRequest.setText("Supplies");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -585,7 +591,6 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnRequest;
-    private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

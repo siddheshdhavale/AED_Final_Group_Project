@@ -146,7 +146,7 @@ public class DoctorWorkArea extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblRequests);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel2.setText("Welcome, You're logged in as Doctor.");
+        jLabel2.setText("Welcome, You're logged in as a Doctor.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

@@ -81,7 +81,7 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 18), new java.awt.Color(153, 0, 153))); // NOI18N
         jPanel4.setOpaque(false);
 
-        jLabel3.setText("image emp");
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\siddh\\Downloads\\employee.png")); // NOI18N
 
         btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -103,7 +103,7 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("image useraccount");
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\siddh\\Downloads\\id-card.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -164,7 +164,7 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1923, Short.MAX_VALUE)
+            .addGap(0, 1958, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,7 +179,7 @@ public class EventCreatorAdminWorkArea extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1923, Short.MAX_VALUE)
+            .addGap(0, 1958, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

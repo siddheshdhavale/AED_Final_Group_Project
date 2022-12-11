@@ -193,7 +193,7 @@ public class ManageEmployee extends javax.swing.JPanel {
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnBack.setText("back");
+        btnBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\siddh\\Downloads\\back.png")); // NOI18N
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +250,7 @@ public class ManageEmployee extends javax.swing.JPanel {
                         .addGap(103, 103, 103))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBack)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
