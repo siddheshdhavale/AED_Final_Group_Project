@@ -45,7 +45,12 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
         btnEnterpriseAdmin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
+        jPanel2.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel3.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("System Admin Work Area");
 
@@ -70,7 +75,9 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
 
         jLabel3.setText("net");
 
+        btnNetwork.setBackground(new java.awt.Color(208, 61, 86));
         btnNetwork.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnNetwork.setForeground(new java.awt.Color(255, 255, 255));
         btnNetwork.setText("Network");
         btnNetwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +85,9 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        btnEnterprise.setBackground(new java.awt.Color(208, 61, 86));
         btnEnterprise.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnEnterprise.setForeground(new java.awt.Color(255, 255, 255));
         btnEnterprise.setText("Enterprise");
         btnEnterprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +97,9 @@ public class SysAdminWorkArea extends javax.swing.JPanel {
 
         jLabel4.setText("ent");
 
+        btnEnterpriseAdmin.setBackground(new java.awt.Color(208, 61, 86));
         btnEnterpriseAdmin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnEnterpriseAdmin.setForeground(new java.awt.Color(255, 255, 255));
         btnEnterpriseAdmin.setText("Enterprise Admin");
         btnEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

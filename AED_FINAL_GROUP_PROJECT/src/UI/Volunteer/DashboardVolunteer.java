@@ -111,7 +111,12 @@ public class DashboardVolunteer extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtVolunteer = new javax.swing.JTextField();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Volunteer Dashboard");
 
@@ -139,7 +144,9 @@ public class DashboardVolunteer extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblEventNGO);
 
+        btnView.setBackground(new java.awt.Color(208, 61, 86));
         btnView.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        btnView.setForeground(new java.awt.Color(255, 255, 255));
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +154,9 @@ public class DashboardVolunteer extends javax.swing.JPanel {
             }
         });
 
+        btnJoinEvent.setBackground(new java.awt.Color(208, 61, 86));
         btnJoinEvent.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        btnJoinEvent.setForeground(new java.awt.Color(255, 255, 255));
         btnJoinEvent.setText("Join Event");
         btnJoinEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
