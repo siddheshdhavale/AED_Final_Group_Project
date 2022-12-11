@@ -145,11 +145,11 @@ public class FireFighterWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Subject", "Description", "Location", "Date", "Status", "Change Maker", "ID"
+                "Name", "Subject", "Description", "Location", "Date", "Status", "Change Maker"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
