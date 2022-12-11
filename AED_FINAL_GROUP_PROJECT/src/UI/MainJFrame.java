@@ -63,6 +63,9 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jSplitPane1.setBackground(new java.awt.Color(219, 243, 250));
         jSplitPane1.setDividerLocation(220);
         jSplitPane1.setDividerSize(0);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -78,9 +81,13 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jPanel3.setBackground(new java.awt.Color(204, 0, 51));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Crisis Management System");
+        jLabel2.setText("Emergency Management System");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -95,6 +102,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
         txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -105,8 +113,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
             }
         });
 
-        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnLogout.setText("image logout");
+        btnLogout.setIcon(new javax.swing.ImageIcon("C:\\Users\\ghostdaddy16\\Downloads\\log-out.png")); // NOI18N
         btnLogout.setBorderPainted(false);
         btnLogout.setContentAreaFilled(false);
         btnLogout.setEnabled(false);
@@ -120,7 +127,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         btnLogin.setBackground(new java.awt.Color(54, 38, 89));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnLogin.setText("image login");
+        btnLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\ghostdaddy16\\Downloads\\login.png")); // NOI18N
         btnLogin.setBorderPainted(false);
         btnLogin.setContentAreaFilled(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +195,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout sidePaneLayout = new javax.swing.GroupLayout(sidePane);
@@ -222,6 +229,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel4.setBackground(new java.awt.Color(219, 243, 250));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -256,7 +264,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1910, Short.MAX_VALUE)
+            .addGap(0, 1978, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
