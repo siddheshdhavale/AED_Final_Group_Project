@@ -79,6 +79,8 @@ public class CSOTaskRequest extends TaskRequest{
     public void setVolQty(String volQty) {
         this.volQty = volQty;
     }
-    
+     public String toString(){
+        return title;
+    }
     
 }
