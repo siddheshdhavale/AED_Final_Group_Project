@@ -173,7 +173,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="emp"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/UI/employee.jpg"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnManageEmployee">
@@ -212,6 +214,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/UI/id-card.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="user"/>
               </Properties>
             </Component>

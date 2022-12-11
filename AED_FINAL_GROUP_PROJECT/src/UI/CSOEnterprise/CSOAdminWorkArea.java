@@ -76,7 +76,7 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 24))); // NOI18N
         jPanel3.setOpaque(false);
 
-        jLabel3.setText("emp");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/CSOEnterprise/12e23e5b-30f6-45f8-9a64-253c98c790ba.jpg"))); // NOI18N
 
         btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -98,7 +98,7 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setText("us");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/id-card.png"))); // NOI18N
 
         btnManageOrganization.setBackground(new java.awt.Color(208, 61, 86));
         btnManageOrganization.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -110,14 +110,14 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setText("org");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/organization.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -157,7 +157,7 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(697, Short.MAX_VALUE)
+                .addContainerGap(762, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(636, 636, 636))
         );
@@ -177,7 +177,7 @@ public class CSOAdminWorkArea extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1900, Short.MAX_VALUE)
+            .addGap(0, 1955, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

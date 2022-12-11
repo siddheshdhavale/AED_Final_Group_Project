@@ -91,7 +91,14 @@ public class SupplyRequest extends javax.swing.JPanel {
         btnBarChart = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
+        jPanel2.setBackground(new java.awt.Color(208, 61, 86));
+        jPanel2.setEnabled(false);
+
+        jLabel1.setBackground(new java.awt.Color(208, 61, 86));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Supply Request");
 
@@ -159,7 +166,9 @@ public class SupplyRequest extends javax.swing.JPanel {
         comboType.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         comboType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "None", "Food", "Clothes", "Medicine", "Education" }));
 
+        btnSubmit.setBackground(new java.awt.Color(208, 61, 86));
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +219,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         );
 
         btnBarChart.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnBarChart.setText("barchart");
+        btnBarChart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/analysis.png"))); // NOI18N
         btnBarChart.setBorderPainted(false);
         btnBarChart.setContentAreaFilled(false);
         btnBarChart.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +229,7 @@ public class SupplyRequest extends javax.swing.JPanel {
         });
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnBack.setText("back");
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/back_f.jpg"))); // NOI18N
         btnBack.setBorderPainted(false);
         btnBack.setContentAreaFilled(false);
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -268,21 +277,17 @@ public class SupplyRequest extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1669, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

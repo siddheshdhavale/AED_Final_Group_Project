@@ -73,7 +73,7 @@ public class VolunteerAdminWorkArea extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Manage", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 0, 36))); // NOI18N
         jPanel3.setOpaque(false);
 
-        jLabel3.setText("emp");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/employee.jpg"))); // NOI18N
 
         btnManageEmployee.setBackground(new java.awt.Color(208, 61, 86));
         btnManageEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -95,6 +95,7 @@ public class VolunteerAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/id-card.png"))); // NOI18N
         jLabel4.setText("user");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
