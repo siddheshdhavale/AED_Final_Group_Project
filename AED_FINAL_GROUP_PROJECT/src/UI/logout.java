@@ -31,6 +31,7 @@ public class logout extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/mainjframe image.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
