@@ -64,13 +64,15 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setEnabled(false);
 
-        jSplitPane1.setBackground(new java.awt.Color(219, 243, 250));
+        jSplitPane1.setBackground(new java.awt.Color(255, 255, 255));
         jSplitPane1.setDividerLocation(220);
         jSplitPane1.setDividerSize(0);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        sidePane.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,6 +240,7 @@ private DB4OUtil db4outil=DB4OUtil.getInstance();
 
         jSplitPane1.setLeftComponent(sidePane);
 
+        panelWorkArea.setBackground(new java.awt.Color(255, 255, 255));
         panelWorkArea.setLayout(new java.awt.CardLayout());
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));

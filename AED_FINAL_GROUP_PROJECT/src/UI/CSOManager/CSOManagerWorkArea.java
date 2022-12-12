@@ -138,6 +138,8 @@ public class CSOManagerWorkArea extends javax.swing.JPanel {
         btnRequest = new javax.swing.JButton();
         btnAnalysis = new javax.swing.JButton();
 
+        jPanel1.setBackground(new java.awt.Color(219, 243, 250));
+
         jPanel2.setBackground(new java.awt.Color(208, 61, 86));
         jPanel2.setToolTipText("");
 
